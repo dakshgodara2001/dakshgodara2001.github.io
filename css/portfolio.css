@@ -1,0 +1,77 @@
+/* Portfolio Section */
+
+/*-------------------------------------------------------*/
+#portfolio {
+	padding: 20px 20px 20px 20px;
+}
+
+/* Images list */
+#portfolio-list {
+	width: 820px;
+	overflow: hidden;
+}
+
+#portfolio-list li {
+	float: left;
+	margin-right: 25px;
+	text-align: center;
+	background-color: #fbfbfb;
+	border-bottom: 1px solid #e5e5e5;
+	height: 185px;
+	margin-bottom: 30px;
+	width: 180px;
+}
+
+#portfolio-list li:hover {
+	border-bottom: 1px solid #cf455c;
+	height: 185px;
+}
+
+#portfolio-list img {
+	background-color: #FFF;
+	height: 120px;
+	width: 180px;
+}
+
+#portfolio-list li:hover .title {
+	color:#cf455c;
+}
+
+#portfolio-list li .title {
+	font-size: 14px;
+	margin-top: 15px;
+	font-weight: 400;
+	color: #3A3A3A;
+}
+
+#portfolio-list li .categorie {
+	font-size: 11px;
+	line-height: 25px;
+	color: #999;
+}
+
+/* Filter menu */
+.cats-filter {
+	border-bottom: 1px solid #ededed;
+	overflow: hidden;
+	padding: 15px 0;
+}
+
+.cats-filter li a {
+	float: left;
+	margin-right: 7px;
+	color: #fff;
+	background-color: #666;
+	padding: 6px;
+	margin-bottom: 5px;
+}
+
+.cats-filter li a:hover {
+	background-color:#cf455c;
+}
+
+.cats-filter li a.current {
+	background-color:#cf455c;
+}
+
+/*-------------------------------------------------------*/

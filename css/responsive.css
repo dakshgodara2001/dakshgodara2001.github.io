@@ -1,0 +1,40 @@
+@media (min-width: 992px) and (max-width: 1199px) {
+	
+}
+@media (min-width: 320px) and (max-width: 991px) {
+ .left-name h2 {
+    font-size: 54px;
+}  
+.left-name h2 span {
+    margin-top: -22px;
+}
+.left-address span {
+    width: 100%;
+}
+.sn {
+    font-size: 23px;
+    width: 58px;
+    height: 58px;
+    border: 3px dotted #edde45;
+    padding-top: 8px;
+}
+.right-skills:after, .right-skills:before {
+    content: none;
+}
+.top-skills {
+    max-width: 100%;
+}
+.right-skills {
+    border-left: 0px solid #edde45;
+    max-width: 100%;
+}
+.col-md-4.intetst-box {
+    width: 50%;
+}
+.address-right-box {
+    padding: 34px 0px 0px;
+}
+.right-skills {
+    width: auto;
+}
+}

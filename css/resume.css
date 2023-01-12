@@ -1,0 +1,129 @@
+/* Resume Section */
+
+/*-------------------------------------------------------*/
+#resume {
+	padding: 40px 20px;
+	overflow: hidden;
+}
+
+.skills-section, .timeline-section {
+	float: left;
+}
+
+/* Timeline Section */
+.timeline-section {
+	width: 490px;
+	padding-right: 60px;
+}
+
+.timeline {
+	margin-bottom: 30px;
+}
+
+.timeline li {
+	margin-bottom: 20px;
+}
+
+.timeline li .timelineUnit {
+	line-height: 17px;
+	margin-left: 0px;
+	color: #444;
+	font-size: 13px;
+	border-left: 1px solid #cf455c;
+	padding-left: 15px;
+}
+
+.timeline li .timelineUnit .timelineDate {
+	line-height: 17px;
+	color:#cf455c;
+	font-size: 14px;
+	margin-left: 10px;
+	font-weight: normal;
+	padding: 2px 6px;
+	float: right;
+}
+
+.timeline li .timelineUnit h4 {
+	line-height: 24px;
+	font-size: 15px;
+	color: #444;
+}
+
+.timeline li .timelineUnit h5 {
+	line-height: 18px;
+	font-size: 13px;
+	color: #999;
+}
+
+.timeline li .timelineUnit p {
+	color: #666;
+	font-size: 12px;
+	margin-top: 5px;
+}
+
+/* Skills Section */
+.skills-section {
+	width: 270px;
+}
+
+.skills {
+	margin-bottom: 25px;
+	overflow: hidden;
+}
+
+.skills li {
+	margin-bottom: 15px;
+	float: left;
+	padding-left: 0px;
+}
+
+.skills li h4 {
+	width: 140px;
+	float: left;
+	font-size: 15px;
+	color: #444;
+}
+
+.skills li .rating {
+	width: 123px;
+	height: 14px;
+	float: left;
+}
+
+.skills li .rating > span {
+	opacity: 0.3;
+	height: 12px;
+	width: 12px;
+	background-color: #757575;
+	display: block;
+	float: left;
+	margin-right: 1px;
+	border: 2px solid #eeeeee;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+}
+
+/* Download Button */
+#resume .button {
+	width: 250px;
+	padding: 10px;
+	background-color: #8c8c8c;
+	overflow: hidden;
+	font-size: 14px;
+	font-weight: 300;
+	line-height: 20px;
+	margin: 20px 0px 0px -20px;
+	color: #f7f7f7;
+	display: block;
+	text-align: center;
+	-webkit-border-radius: 0px 4px 4px 0px;
+	-moz-border-radius: 0px 4px 4px 0px;
+	border-radius: 0px 4px 4px 0px;
+}
+
+#resume .button:hover {
+	background-color:#cf455c;
+}
+
+/*-------------------------------------------------------*/
