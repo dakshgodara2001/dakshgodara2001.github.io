@@ -1,2 +1,2 @@
 # dakshgodara2001.github.io
-my web portfolio -> <a href="https://dakshgodara2001.github.io" target="_blank">Daksh Godara</a>
+my web portfolio -> (https://dakshgodara2001.github.io)[Daksh Godara]{:target="_blank" rel="noopener"}
