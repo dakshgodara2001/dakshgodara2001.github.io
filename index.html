@@ -489,12 +489,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<form id="myForm" action="https://formspree.io/f/mknalrgv" method="POST">
 		  <label>
 		    <p style="color:#398B8C">Your email:
-			    <input type="email" name="email" style="width: 100%; padding: 5px; margin-bottom: 10px;"></p>
+			    <input type="email" name="email" id="email" style="width: 100%; padding: 5px; margin-bottom: 10px;"></p>
 		  </label>
 			<br>
 		  <label>
 		    <p style="color:#398B8C">Your message:
-			    <textarea name="message" style="width: 100%; padding: 5px; margin-bottom: 10px;"></textarea>
+			    <textarea name="message" id="message" style="width: 100%; padding: 5px; margin-bottom: 10px;"></textarea>
 		    </p>
 		  </label>
 			<br>
@@ -524,7 +524,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		    event.preventDefault(); // Prevent form submission
 
 		    // Clear the form fields
-		    document.getElementById('myForm').reset();
+		    	document.getElementById('email').value = '';
+    			document.getElementById('message').value = '';
 		  });
 	</script>
 	<!--//smooth-scrolling-of-move-up-->
