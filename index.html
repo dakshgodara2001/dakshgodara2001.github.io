@@ -486,7 +486,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<div class="container">
 		<p style="color:#f0d13a;">Thank you for visiting my web portfolio, I hope you enjoy exploring my work and learning more about my skills and experience. If you have any questions, please leave a message below.</p>
 			<br>
-		<form action="https://formspree.io/f/mknalrgv" method="POST">
+		<form id="myForm" action="https://formspree.io/f/mknalrgv" method="POST">
 		  <label>
 		    <p style="color:#398B8C">Your email:
 			    <input type="email" name="email" style="width: 100%; padding: 5px; margin-bottom: 10px;"></p>
@@ -500,6 +500,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<br>
 		  <!-- your other form fields go here -->
 		  <button type="submit" style="background-color: #398B8C; color: #fff; padding: 10px 20px; border: none; cursor: pointer;">Send</button>
+			<br>
 		</form>
 	</div>
 </div>
@@ -519,6 +520,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			$().UItoTop({ easingType: 'easeOutQuart' });
 			
 		});
+		document.getElementById('myForm').addEventListener('submit', function(event) {
+		    event.preventDefault(); // Prevent form submission
+
+		    // Clear the form fields
+		    document.getElementById('myForm').reset();
+		  });
 	</script>
 	<!--//smooth-scrolling-of-move-up-->
 	<!-- Bootstrap core JavaScript
