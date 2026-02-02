@@ -201,12 +201,13 @@ function animateStats() {
 
         stats.forEach(stat => {
             const text = stat.textContent;
-            const match = text.match(/^([\d.]+)(.*)$/);
+            const match = text.match(/^([^\d]*)([\d.]+)(.*)$/);
 
             if (match) {
-                const endValue = parseFloat(match[1]);
-                const suffix = match[2];
-                const duration = 2000;
+                const prefix = match[1];
+                const endValue = parseFloat(match[2]);
+                const suffix = match[3];
+                const duration = 2500;
                 const startTime = performance.now();
 
                 function updateCounter(currentTime) {
@@ -219,9 +220,9 @@ function animateStats() {
 
                     // Format the number
                     if (endValue % 1 === 0) {
-                        stat.textContent = Math.floor(currentValue) + suffix;
+                        stat.textContent = prefix + Math.floor(currentValue) + suffix;
                     } else {
-                        stat.textContent = currentValue.toFixed(1) + suffix;
+                        stat.textContent = prefix + currentValue.toFixed(1) + suffix;
                     }
 
                     if (progress < 1) {
