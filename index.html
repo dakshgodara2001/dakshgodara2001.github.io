@@ -6,6 +6,21 @@
     <meta name="description" content="Daksh Godara - Product Manager at INDmoney | Building fintech products that matter">
     <meta name="keywords" content="Product Manager, INDmoney, Fintech, Portfolio, Full Stack Developer">
     <meta name="author" content="Daksh Godara">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dakshgodara2001.github.io/">
+    <meta property="og:title" content="Daksh Godara | Product Manager @ INDmoney">
+    <meta property="og:description" content="Building 0→1 products across Insurance, Wealth & AI at scale. 4M+ users impacted.">
+    <meta property="og:image" content="https://dakshgodara2001.github.io/assets/og-image.png">
+    <meta property="og:site_name" content="Daksh Godara">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Daksh Godara | Product Manager @ INDmoney">
+    <meta name="twitter:description" content="Building 0→1 products across Insurance, Wealth & AI at scale. 4M+ users impacted.">
+    <meta name="twitter:image" content="https://dakshgodara2001.github.io/assets/og-image.png">
+
     <title>Daksh Godara | Product Manager</title>
 
     <!-- Favicon -->
@@ -20,8 +35,11 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <!-- Skip to content -->
+    <a href="#about" class="skip-to-content">Skip to content</a>
+
     <!-- Navigation -->
-    <nav class="navbar" id="navbar">
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
             <a href="#home" class="nav-logo">
                 <span class="logo-bracket">&lt;</span>DG<span class="logo-bracket">/&gt;</span>
@@ -30,9 +48,11 @@
                 <a href="#home" class="nav-link active">Home</a>
                 <a href="#about" class="nav-link">About</a>
                 <a href="#experience" class="nav-link">Experience</a>
+                <a href="#case-study" class="nav-link">Case Study</a>
                 <a href="#projects" class="nav-link">Projects</a>
                 <a href="#education" class="nav-link">Education</a>
                 <a href="#achievements" class="nav-link">Achievements</a>
+                <a href="#writing" class="nav-link">Writing</a>
                 <a href="#connect" class="nav-link">Connect</a>
             </div>
             <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
@@ -43,9 +63,9 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="hero-bg">
+        <div class="hero-bg" aria-hidden="true">
             <div class="grid-lines"></div>
-            <div class="floating-icons">
+            <div class="floating-icons" aria-hidden="true">
                 <span class="float-icon">&#x2B21;</span>
                 <span class="float-icon">&#x25C6;</span>
                 <span class="float-icon">&#x2B22;</span>
@@ -68,9 +88,9 @@
                         <path d="M5 12h14M12 5l7 7-7 7"/>
                     </svg>
                 </a>
-                <a href="https://drive.google.com/file/d/1ds3DAJHtgFpdLu5nRTikKOIpkLhhfq1L/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                <a href="assets/Daksh_Godara_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
                     </svg>
                     <span>Resume</span>
                 </a>
@@ -171,9 +191,12 @@
                 </div>
                 <div class="about-image">
                     <div class="image-frame">
-                        <img src="assets/profile_pic.png" alt="Daksh Godara">
+                        <picture>
+                            <source srcset="assets/profile_pic.webp" type="image/webp">
+                            <img src="assets/profile_pic.jpg" alt="Daksh Godara" width="546" height="700" loading="lazy">
+                        </picture>
                     </div>
-                    <div class="image-decoration"></div>
+                    <div class="image-decoration" aria-hidden="true"></div>
                 </div>
             </div>
         </div>
@@ -480,12 +503,80 @@
         </div>
     </section>
 
+    <!-- Case Study Section -->
+    <section class="section case-study" id="case-study">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-number">03.</span>
+                Featured Case Study
+            </h2>
+            <div class="case-study-card">
+                <div class="case-study-badge">INDmoney &middot; Term Life Insurance</div>
+                <h3 class="case-study-heading">How we became India's 3rd largest digital insurance aggregator</h3>
+
+                <div class="case-study-grid">
+                    <div class="case-study-section">
+                        <h4>Context</h4>
+                        <p>INDmoney wanted to expand beyond wealth management into insurance. Term life insurance was chosen as the entry point — high ticket size, high intent, and strong unit economics. There was no existing insurance infrastructure in the product.</p>
+                    </div>
+
+                    <div class="case-study-section">
+                        <h4>Challenge</h4>
+                        <p>Insurance is a trust-heavy, regulation-heavy category. Users compare across aggregators before buying. We needed to build the full stack — quote engine, proposal journey, insurer integrations, payment, issuance, and post-sale servicing — while competing with established players like Policybazaar.</p>
+                    </div>
+
+                    <div class="case-study-section">
+                        <h4>Approach</h4>
+                        <ul>
+                            <li>Built a modular integration layer to onboard insurers fast — integrated ICICI Prudential, Bajaj Life, Tata AIA, and Axis Max Life</li>
+                            <li>Designed the funnel for maximum DIY conversion — minimal steps, smart defaults, real-time premium calculation</li>
+                            <li>Built an end-to-end CRM supporting 50+ sales agents for assisted conversions</li>
+                            <li>Introduced Riders/Add-ons to increase ATV without adding funnel friction</li>
+                            <li>Integrated auto-dialer into CRM, improving call connectivity by 30%</li>
+                        </ul>
+                    </div>
+
+                    <div class="case-study-section">
+                        <h4>Key Decisions</h4>
+                        <ul>
+                            <li><strong>DIY-first, assisted-second:</strong> Optimized the funnel so users could complete purchase independently, with sales agents stepping in only when needed — this kept CAC low</li>
+                            <li><strong>Speed over coverage:</strong> Launched with 4 insurers instead of waiting for 10 — got to market fast and iterated based on user preference data</li>
+                            <li><strong>CRM as a product:</strong> Built the internal CRM as a full product (not a hack) — this became a platform used across insurance verticals</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="case-study-results">
+                    <h4>Results</h4>
+                    <div class="case-study-metrics">
+                        <div class="case-study-metric">
+                            <span class="case-study-metric-value">#3</span>
+                            <span class="case-study-metric-label">Largest digital insurance aggregator by revenue in India</span>
+                        </div>
+                        <div class="case-study-metric">
+                            <span class="case-study-metric-value">Highest</span>
+                            <span class="case-study-metric-label">Funnel conversion rates in the industry</span>
+                        </div>
+                        <div class="case-study-metric">
+                            <span class="case-study-metric-value">30%</span>
+                            <span class="case-study-metric-label">Increase in call connectivity via auto-dialer</span>
+                        </div>
+                        <div class="case-study-metric">
+                            <span class="case-study-metric-value">50+</span>
+                            <span class="case-study-metric-label">Sales agents supported on CRM platform</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Projects Section -->
     <section class="section projects" id="projects">
         <div class="container">
             <h2 class="section-title">
-                <span class="title-number">03.</span>
-                Vibe Coding Projects
+                <span class="title-number">04.</span>
+                Projects
             </h2>
             <!-- <div class="projects-filter">
                 <button class="filter-btn active" data-filter="all">All Projects</button>
@@ -493,7 +584,7 @@
                 <button class="filter-btn" data-filter="independent">Independent</button>
             </div> -->
             <div class="projects-grid">
-                <!-- 8Bins
+                <!-- 8Bins -->
                 <div class="project-card" data-category="startup">
                     <div class="project-header">
                         <div class="project-icon">
@@ -504,7 +595,7 @@
                             </svg>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/dakshgodara2001" target="_blank" class="project-link" title="GitHub">
+                            <a href="https://github.com/dakshgodara2001" target="_blank" class="project-link" title="GitHub" aria-label="View source on GitHub">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
                                 </svg>
@@ -513,8 +604,8 @@
                     </div>
                     <h3 class="project-title">8Bins - Smart Waste Management</h3>
                     <p class="project-description">
-                        IoT-enabled smart waste management system with computer vision technology
-                        for automatic waste classification and optimized collection routes.
+                        IoT-enabled smart waste management system with computer vision for
+                        automatic waste classification. Top 12 at NASSCOM CienaHack 2020.
                     </p>
                     <div class="project-impact">
                         <span class="impact-label">Role:</span>
@@ -523,174 +614,8 @@
                     <div class="project-tags">
                         <span>IoT</span>
                         <span>Computer Vision</span>
-                        <span>Python</span>
+                        <span>Startup</span>
                     </div>
-                </div> -->
-
-                <!-- Video Streaming Platform -->
-                <div class="project-card" data-category="independent">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <polygon points="23 7 16 12 23 17 23 7"/>
-                                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
-                            </svg>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/dakshgodara2001/Video-Streaming" target="_blank" class="project-link" title="GitHub">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                    <h3 class="project-title">Video Streaming Platform</h3>
-                    <p class="project-description">
-                        Peer-to-peer video chat application built with Django, WebRTC and WebSocket
-                        for real-time communication and streaming.
-                    </p>
-                    <div class="project-impact">
-                        <span class="impact-label">Tech:</span>
-                        <span class="impact-value">Django, WebRTC, WebSocket</span>
-                    </div>
-                    <!-- <div class="project-tags">
-                        <span>WebRTC</span>
-                        <span>Django</span>
-                        <span>Real-time</span>
-                    </div> -->
-                </div>
-
-                <!-- Chatter -->
-                <div class="project-card" data-category="independent">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-                            </svg>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/dakshgodara2001/Chatter" target="_blank" class="project-link" title="GitHub">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                    <h3 class="project-title">Chatter - Social Networking App</h3>
-                    <p class="project-description">
-                        Android social networking application built with Kotlin and Firebase,
-                        featuring real-time messaging and social features.
-                    </p>
-                    <div class="project-impact">
-                        <span class="impact-label">Tech:</span>
-                        <span class="impact-value">Kotlin, Firebase, Android</span>
-                    </div>
-                    <!-- <div class="project-tags">
-                        <span>Android</span>
-                        <span>Kotlin</span>
-                        <span>Firebase</span>
-                    </div> -->
-                </div>
-
-                <!-- LiveCodeCoLab -->
-                <div class="project-card" data-category="independent">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <polyline points="16 18 22 12 16 6"/>
-                                <polyline points="8 6 2 12 8 18"/>
-                            </svg>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/dakshgodara2001/LiveCodeCoLab" target="_blank" class="project-link" title="GitHub">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                    <h3 class="project-title">LiveCodeCoLab</h3>
-                    <p class="project-description">
-                        Real-time code collaboration tool enabling multiple developers to code
-                        together with live synchronization using Socket.io.
-                    </p>
-                    <div class="project-impact">
-                        <span class="impact-label">Tech:</span>
-                        <span class="impact-value">React, Node.js, Socket.io</span>
-                    </div>
-                    <!-- <div class="project-tags">
-                        <span>Real-time</span>
-                        <span>Socket.io</span>
-                        <span>Collaboration</span>
-                    </div> -->
-                </div>
-
-                <!-- Khadi Attire -->
-                <div class="project-card" data-category="independent">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <circle cx="9" cy="21" r="1"/>
-                                <circle cx="20" cy="21" r="1"/>
-                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-                            </svg>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/dakshgodara2001/Khadi-Attire" target="_blank" class="project-link" title="GitHub">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                    <h3 class="project-title">Khadi Attire - E-commerce Platform</h3>
-                    <p class="project-description">
-                        Full-stack e-commerce platform with PayPal payment integration,
-                        inventory management and complete shopping cart functionality.
-                    </p>
-                    <div class="project-impact">
-                        <span class="impact-label">Tech:</span>
-                        <span class="impact-value">Django, PayPal, Bootstrap</span>
-                    </div>
-                    <!-- <div class="project-tags">
-                        <span>E-commerce</span>
-                        <span>Stripe</span>
-                        <span>Full-stack</span>
-                    </div> -->
-                </div>
-
-                <!-- Number Plate Detector -->
-                <div class="project-card" data-category="independent">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                                <circle cx="8.5" cy="8.5" r="1.5"/>
-                                <polyline points="21 15 16 10 5 21"/>
-                            </svg>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/dakshgodara2001/Number-Plate-Detector" target="_blank" class="project-link" title="GitHub">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                    <h3 class="project-title">Number Plate Detector</h3>
-                    <p class="project-description">
-                        Computer vision web application for automatic license plate detection
-                        and recognition using OpenCV and machine learning.
-                    </p>
-                    <div class="project-impact">
-                        <span class="impact-label">Tech:</span>
-                        <span class="impact-value">Python, OpenCV, ML</span>
-                    </div>
-                    <!-- <div class="project-tags">
-                        <span>Computer Vision</span>
-                        <span>OpenCV</span>
-                        <span>Python</span>
-                    </div> -->
                 </div>
 
                 <!-- Stock Monitoring Platform -->
@@ -702,7 +627,7 @@
                             </svg>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/dakshgodara2001/Stock-Monitoring-Platform" target="_blank" class="project-link" title="GitHub">
+                            <a href="https://github.com/dakshgodara2001/Stock-Monitoring-Platform" target="_blank" class="project-link" title="GitHub" aria-label="View source on GitHub">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
                                 </svg>
@@ -718,11 +643,77 @@
                         <span class="impact-label">Tech:</span>
                         <span class="impact-value">React, APIs, Real-time</span>
                     </div>
-                    <!-- <div class="project-tags">
+                    <div class="project-tags">
                         <span>Fintech</span>
                         <span>Real-time</span>
                         <span>Dashboard</span>
-                    </div> -->
+                    </div>
+                </div>
+
+                <!-- LiveCodeCoLab -->
+                <div class="project-card" data-category="independent">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <polyline points="16 18 22 12 16 6"/>
+                                <polyline points="8 6 2 12 8 18"/>
+                            </svg>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/dakshgodara2001/LiveCodeCoLab" target="_blank" class="project-link" title="GitHub" aria-label="View source on GitHub">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">LiveCodeCoLab</h3>
+                    <p class="project-description">
+                        Real-time code collaboration tool enabling multiple developers to code
+                        together with live synchronization using Socket.io.
+                    </p>
+                    <div class="project-impact">
+                        <span class="impact-label">Tech:</span>
+                        <span class="impact-value">React, Node.js, Socket.io</span>
+                    </div>
+                    <div class="project-tags">
+                        <span>Real-time</span>
+                        <span>Socket.io</span>
+                        <span>Collaboration</span>
+                    </div>
+                </div>
+
+                <!-- Video Streaming Platform -->
+                <div class="project-card" data-category="independent">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <polygon points="23 7 16 12 23 17 23 7"/>
+                                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+                            </svg>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/dakshgodara2001/Video-Streaming" target="_blank" class="project-link" title="GitHub" aria-label="View source on GitHub">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">Video Streaming Platform</h3>
+                    <p class="project-description">
+                        Peer-to-peer video chat application built with Django, WebRTC and WebSocket
+                        for real-time communication and streaming.
+                    </p>
+                    <div class="project-impact">
+                        <span class="impact-label">Tech:</span>
+                        <span class="impact-value">Django, WebRTC, WebSocket</span>
+                    </div>
+                    <div class="project-tags">
+                        <span>WebRTC</span>
+                        <span>Django</span>
+                        <span>Real-time</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -732,7 +723,7 @@
     <section class="section education" id="education">
         <div class="container">
             <h2 class="section-title">
-                <span class="title-number">04.</span>
+                <span class="title-number">05.</span>
                 Education
             </h2>
             <div class="education-grid">
@@ -784,7 +775,7 @@
     <section class="section achievements" id="achievements">
         <div class="container">
             <h2 class="section-title">
-                <span class="title-number">05.</span>
+                <span class="title-number">06.</span>
                 Other Achievements
             </h2>
             <div class="achievements-grid">
@@ -857,11 +848,54 @@
         </div>
     </section>
 
+    <!-- Writing Section -->
+    <section class="section writing" id="writing">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-number">07.</span>
+                Writing
+            </h2>
+            <p class="writing-intro">Thoughts on product building, fintech, and working at the intersection of engineering and business.</p>
+            <div class="writing-grid">
+                <article class="writing-card">
+                    <span class="writing-badge">Coming Soon</span>
+                    <h3 class="writing-title">How We Built India's Highest-Converting Insurance Funnel</h3>
+                    <p class="writing-excerpt">A deep dive into the design decisions, technical tradeoffs, and growth loops behind INDmoney's term life insurance product.</p>
+                    <div class="writing-meta">
+                        <span>Product Strategy</span>
+                        <span>&middot;</span>
+                        <span>Insurance</span>
+                    </div>
+                </article>
+                <article class="writing-card">
+                    <span class="writing-badge">Coming Soon</span>
+                    <h3 class="writing-title">Shipping an AI Chatbot in Insurance: What Worked, What Didn't</h3>
+                    <p class="writing-excerpt">Lessons from building a RAG-based chatbot for life insurance — from plan comparisons to policy wording explanations.</p>
+                    <div class="writing-meta">
+                        <span>AI / LLMs</span>
+                        <span>&middot;</span>
+                        <span>Product</span>
+                    </div>
+                </article>
+                <article class="writing-card">
+                    <span class="writing-badge">Coming Soon</span>
+                    <h3 class="writing-title">Building Internal Tools as Products, Not Hacks</h3>
+                    <p class="writing-excerpt">Why we treated our sales CRM as a first-class product — and how it became a platform powering multiple business lines.</p>
+                    <div class="writing-meta">
+                        <span>Platform Thinking</span>
+                        <span>&middot;</span>
+                        <span>CRM</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
     <!-- Connect Section -->
     <section class="section connect" id="connect">
         <div class="container">
             <h2 class="section-title">
-                <span class="title-number">06.</span>
+                <span class="title-number">08.</span>
                 Let's Connect
             </h2>
             <div class="connect-content">
@@ -925,9 +959,9 @@
                         </div>
                     </a>
                 </div>
-                <a href="https://drive.google.com/file/d/1ds3DAJHtgFpdLu5nRTikKOIpkLhhfq1L/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large">
+                <a href="assets/Daksh_Godara_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
                     </svg>
                     <span>View My Resume</span>
                 </a>
@@ -946,7 +980,7 @@
                     &copy; 2024 All rights reserved.
                 </p> -->
             </div>
-            <a href="#home" class="back-to-top" id="back-to-top">
+            <a href="#home" class="back-to-top" id="back-to-top" aria-label="Back to top">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M12 19V5M5 12l7-7 7 7"/>
                 </svg>
