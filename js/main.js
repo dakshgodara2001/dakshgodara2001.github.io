@@ -265,4 +265,4 @@ if (window.matchMedia('(pointer: fine)').matches && window.innerWidth > 768) {
 // ===== Console Easter Egg =====
 console.log('%c Welcome to my portfolio! ', 'background: #00d9ff; color: #0a0a0f; font-size: 16px; padding: 10px; border-radius: 5px;');
 console.log('%c Built with HTML, CSS, and JavaScript ', 'color: #8b5cf6; font-size: 12px;');
-console.log('%c Feel free to connect: dakshgodara2001@gmail.com ', 'color: #a1a1aa; font-size: 12px;');
+console.log('%c Feel free to connect: godaradaksh2001@gmail.com ', 'color: #a1a1aa; font-size: 12px;');
