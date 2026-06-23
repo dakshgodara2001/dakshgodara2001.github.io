@@ -355,11 +355,25 @@
     stones.push(new Stone(x, y, clamp(vxHint, -4.5, 4.5)));
     recoil();
   }
+  // mouse / pen fire on press; touch fires only on a clean tap, so scrolling never fires
+  let tap = null;
+  const TAP_MOVE = 12, TAP_TIME = 700;
   document.addEventListener('pointerdown', (e) => {
-    if (e.target.closest && e.target.closest(IGNORE)) return;
     if (e.button !== undefined && e.button !== 0) return;
-    const vx = e.pointerType === 'touch' ? 0 : clamp(pointerVX * 0.45, -4.5, 4.5);
-    fireAt(e.clientX, e.clientY, vx);
+    if (e.target.closest && e.target.closest(IGNORE)) return;
+    if (e.pointerType === 'touch') { tap = { x: e.clientX, y: e.clientY, t: performance.now() }; return; }
+    fireAt(e.clientX, e.clientY, clamp(pointerVX * 0.45, -4.5, 4.5));
+  });
+  document.addEventListener('pointermove', (e) => {
+    if (tap && Math.hypot(e.clientX - tap.x, e.clientY - tap.y) > TAP_MOVE) tap = null;   // became a scroll
+  }, { passive: true });
+  document.addEventListener('pointercancel', () => { tap = null; });
+  document.addEventListener('pointerup', (e) => {
+    if (e.pointerType !== 'touch' || !tap) return;
+    const start = tap; tap = null;
+    if (performance.now() - start.t > TAP_TIME) return;                  // long press, not a tap
+    if (e.target.closest && e.target.closest(IGNORE)) return;
+    fireAt(e.clientX, e.clientY, 0);
   });
 
   /* ---------------------------------------------------------
