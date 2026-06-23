@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Daksh Godara - Product Manager at INDmoney | Building fintech products that matter">
-    <meta name="keywords" content="Product Manager, INDmoney, Fintech, Portfolio, Full Stack Developer">
+    <meta name="description" content="Daksh Godara - Product Manager at INDmoney. Building 0→1 fintech, insurance & AI products that move business metrics.">
+    <meta name="keywords" content="Product Manager, INDmoney, Fintech, AI, Portfolio, Daksh Godara">
     <meta name="author" content="Daksh Godara">
 
     <!-- Open Graph -->
@@ -24,12 +24,12 @@
     <title>Daksh Godara | Product Manager</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230a0a0f'/><text x='50' y='62' font-family='monospace' font-size='36' font-weight='bold' fill='%2300d9ff' text-anchor='middle'>DG</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='14' fill='%2316181d'/><text x='50' y='64' font-family='monospace' font-size='34' font-weight='bold' fill='%23e2674a' text-anchor='middle'>DG</text></svg>">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600&family=Noto+Serif:ital@1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link rel="stylesheet" href="css/style.css">
@@ -38,885 +38,365 @@
     <!-- Skip to content -->
     <a href="#about" class="skip-to-content">Skip to content</a>
 
+    <!-- Slingshot cursor -->
+    <div class="slingshot" id="slingshot" aria-hidden="true">
+        <svg width="46" height="52" viewBox="0 0 46 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- band -->
+            <path class="sling-band" id="sling-band" d="M11 16 L23 25 L35 16" stroke="var(--warm)" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+            <!-- pouch -->
+            <circle class="sling-pouch" cx="23" cy="25" r="2.4" fill="var(--warm)"/>
+            <!-- fork -->
+            <path class="sling-fork" d="M11 16 V9 M35 16 V9 M11 16 C13 26 21 30 23 38 M35 16 C33 26 25 30 23 38" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+            <!-- handle -->
+            <path class="sling-fork" d="M23 38 V49" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+    </div>
+
+    <!-- Sky canvas: birds, stones, confetti -->
+    <canvas id="sky" aria-hidden="true"></canvas>
+
     <!-- Navigation -->
     <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
-            <a href="#home" class="nav-logo">
+            <a href="#home" class="nav-logo" data-fire="off">
                 <span class="logo-bracket">&lt;</span>DG<span class="logo-bracket">/&gt;</span>
             </a>
             <div class="nav-menu" id="nav-menu">
-                <a href="#home" class="nav-link active">Home</a>
                 <a href="#about" class="nav-link">About</a>
                 <a href="#experience" class="nav-link">Experience</a>
                 <a href="#projects" class="nav-link">Projects</a>
                 <a href="#education" class="nav-link">Education</a>
                 <a href="#connect" class="nav-link">Connect</a>
             </div>
-            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
-                <span class="hamburger"></span>
-            </button>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="theme-toggle" data-fire="off" aria-label="Toggle light / dark theme" title="Toggle theme">
+                    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="4"/>
+                        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+                    </svg>
+                    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+                    </svg>
+                </button>
+                <button class="nav-toggle" id="nav-toggle" data-fire="off" aria-label="Toggle menu">
+                    <span class="hamburger"></span>
+                </button>
+            </div>
         </div>
     </nav>
 
+    <!-- Game HUD / message box -->
+    <aside class="game-hud" id="game-hud" aria-live="polite">
+        <button class="game-hud-close" id="game-hud-close" data-fire="off" aria-label="Hide game panel">&times;</button>
+        <p class="game-hud-eyebrow">// easter egg</p>
+        <p class="game-hud-title">Two birds, one stone</p>
+        <p class="game-hud-sub">Your cursor's a <strong>slingshot</strong>. Click the sky and try to down two birds with one stone.</p>
+        <p class="game-hud-score">
+            <span>Birds&nbsp;down <b id="score-birds">0</b></span>
+            <span>Doubles <b id="score-doubles">0</b></span>
+        </p>
+    </aside>
+
+    <!-- More on the idiom -->
+    <aside class="idiom-note" id="idiom-note" aria-label="More on two birds, one stone">
+        <p class="idiom-eyebrow">🎬 more on</p>
+        <p class="idiom-title">“Two birds, one&nbsp;stone”</p>
+        <a class="idiom-link" href="https://www.youtube.com/watch?v=71gilEP4aJY" target="_blank" rel="noopener">Watch the comic ↗</a>
+    </aside>
+
+    <!-- Congrats toast -->
+    <div class="congrats" id="congrats" role="status" aria-live="assertive">
+        <span class="congrats-emoji">🎯</span>
+        <span class="congrats-text">Two birds, one stone!</span>
+    </div>
+
     <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-bg" aria-hidden="true">
-            <div class="grid-lines"></div>
-            <div class="floating-icons" aria-hidden="true">
-                <span class="float-icon">&#x2B21;</span>
-                <span class="float-icon">&#x25C6;</span>
-                <span class="float-icon">&#x2B22;</span>
-                <span class="float-icon">&#x25CB;</span>
-                <span class="float-icon">&#x2B23;</span>
-            </div>
-        </div>
+    <header class="hero" id="home">
         <div class="hero-content">
-            <p class="hero-greeting">Hello, I'm</p>
-            <h1 class="hero-name">
-                <span class="typing-text" id="typing-text"></span>
-                <span class="cursor">|</span>
-            </h1>
-            <p class="hero-title">Product Manager <span class="highlight">@ INDmoney</span></p>
-            <p class="hero-tagline">Building 0→1 fintech, insurance & AI products that move business metrics</p>
+            <p class="hero-greeting">Hi, I'm</p>
+            <h1 class="hero-name">Daksh <span class="serif">Godara</span></h1>
+            <p class="hero-role">Product Manager <span class="at">@</span> <a href="https://www.indmoney.com" target="_blank" rel="noopener" class="role-link">INDmoney</a></p>
+            <p class="hero-tagline">I build <span class="serif">0→1</span> fintech and AI products.</p>
             <div class="hero-cta">
-                <a href="#projects" class="btn btn-primary">
-                    <span>View My Work</span>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                </a>
-                <a href="assets/res_tdyg.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
-                    </svg>
-                    <span>Resume</span>
-                </a>
+                <a href="#projects" class="btn btn-primary">View my work</a>
+                <a href="assets/res_tdyg.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Résumé ↗</a>
             </div>
             <div class="hero-stats">
-                <div class="stat">
-                    <span class="stat-number">4M+</span>
-                    <span class="stat-label">Users Impacted</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">$120K+</span>
-                    <span class="stat-label">MRR Influenced</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">6</span>
-                    <span class="stat-label">0→1 Products</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">1.3×</span>
-                    <span class="stat-label">ARPU Lift</span>
-                </div>
+                <div class="stat"><span class="stat-number">4M+</span><span class="stat-label">Users impacted</span></div>
+                <div class="stat"><span class="stat-number">$1.44M+</span><span class="stat-label">ARR influenced</span></div>
+                <div class="stat"><span class="stat-number">6</span><span class="stat-label">0→1 products</span></div>
+                <div class="stat"><span class="stat-number">2.5×</span><span class="stat-label">ARPU lift</span></div>
             </div>
         </div>
-        <a href="#about" class="scroll-indicator">
-            <span>Scroll</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 5v14M19 12l-7 7-7-7"/>
-            </svg>
+        <a href="#about" class="scroll-cue" data-fire="off" aria-label="Scroll to about">
+            <span>scroll</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
         </a>
-    </section>
+    </header>
 
-    <!-- About Section -->
+    <main>
+    <!-- About -->
     <section class="section about" id="about">
         <div class="container">
-            <h2 class="section-title">
-                <span class="title-number">01.</span>
-                About Me
-            </h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p class="about-intro">
-                        I'm a <span class="highlight">Product Manager</span> with a strong technical background,
-                        building scalable fintech and AI-enabled products at <span class="highlight">INDmoney</span>.
-                    </p>
-                    <div class="skills-container">
-                        <div class="skill-category">
-                            <h4 class="skill-category-title">Product & Strategy</h4>
-                            <div class="skills-grid">
-                                <span class="skill-tag">Product Strategy</span>
-                                <span class="skill-tag">0→1 Launches</span>
-                                <span class="skill-tag">Funnel Optimization</span>
-                                <span class="skill-tag">Monetization</span>
-                                <span class="skill-tag">User Research</span>
-                                <span class="skill-tag">Growth</span>
-                                <span class="skill-tag">Product Roadmapping</span>
-                                <span class="skill-tag">PRDs</span>
+            <p class="section-eyebrow"><span class="section-num">01</span> / about</p>
+            <div class="about-grid">
+                <div class="about-text reveal">
+                    <p class="about-lead">I'm a <em class="serif">product manager with a technical background</em>. I can write a PRD, query the funnel in SQL, or wire up an LLM workflow.</p>
+                    <p>Today I lead 0→1 fintech and AI products at <a href="https://www.indmoney.com" target="_blank" rel="noopener">INDmoney</a>, from early discovery through to launch.</p>
+                    <div class="skills">
+                        <div class="skill-group">
+                            <h4>Product &amp; Strategy</h4>
+                            <div class="tags">
+                                <span>Product Strategy</span><span>0→1 Launches</span><span>Funnel Optimization</span><span>Monetization</span><span>User Research</span><span>Roadmapping</span><span>PRDs</span>
                             </div>
                         </div>
-                        <div class="skill-category">
-                            <h4 class="skill-category-title">Fintech, Insurance & Wealth</h4>
-                            <div class="skills-grid">
-                                <span class="skill-tag">Life Insurance</span>
-                                <span class="skill-tag">Motor Insurance</span>
-                                <span class="skill-tag">Wealth Products</span>
-                                <span class="skill-tag">Goal-based Investing</span>
-                                <span class="skill-tag">Premium User Journeys</span>
-                                <span class="skill-tag">CRM Workflows</span>
-                                <span class="skill-tag">Insurer Integrations</span>
-                                <span class="skill-tag">Sales Enablement</span>
+                        <div class="skill-group">
+                            <h4>Fintech &amp; Wealth</h4>
+                            <div class="tags">
+                                <span>Life Insurance</span><span>Motor Insurance</span><span>Wealth Products</span><span>Goal-based Investing</span><span>CRM Workflows</span><span>Insurer Integrations</span>
                             </div>
                         </div>
-                        <div class="skill-category">
-                            <h4 class="skill-category-title">AI & Automation</h4>
-                            <div class="skills-grid">
-                                <span class="skill-tag">Agentic AI</span>
-                                <span class="skill-tag">RAG Products</span>
-                                <span class="skill-tag">LLM Workflows</span>
-                                <span class="skill-tag">Prompt Design</span>
-                                <span class="skill-tag">Evaluation Loops</span>
-                                <span class="skill-tag">LangGraph</span>
-                                <span class="skill-tag">Agent Harness</span>
-                                <span class="skill-tag">Multi-agent Workflows</span>
+                        <div class="skill-group">
+                            <h4>AI &amp; Automation</h4>
+                            <div class="tags">
+                                <span>Agentic AI</span><span>RAG Products</span><span>LLM Workflows</span><span>Prompt Design</span><span>Evaluation Loops</span><span>Multi-agent Systems</span>
                             </div>
                         </div>
-                        <div class="skill-category">
-                            <h4 class="skill-category-title tech-stack">Analytics, Systems & Tools</h4>
-                            <div class="skills-grid">
-                                <span class="skill-tag subtle">Python</span>
-                                <span class="skill-tag subtle">SQL</span>
-                                <span class="skill-tag subtle">Mixpanel</span>
-                                <span class="skill-tag subtle">Grafana</span>
-                                <span class="skill-tag subtle">NewRelic</span>
-                                <span class="skill-tag subtle">APIs & Integrations</span>
-                                <span class="skill-tag subtle">System Design</span>
-                                <span class="skill-tag subtle">Figma</span>
-                                <span class="skill-tag subtle">Balsamiq</span>
-                                <span class="skill-tag subtle">Jira</span>
-                                <span class="skill-tag subtle">Postman</span>
-                                <span class="skill-tag subtle">Cursor</span>
-                                <span class="skill-tag subtle">Claude Code</span>
-                                <span class="skill-tag subtle">Excel</span>
+                        <div class="skill-group">
+                            <h4>Analytics &amp; Tools</h4>
+                            <div class="tags subtle">
+                                <span>Python</span><span>SQL</span><span>Mixpanel</span><span>Grafana</span><span>NewRelic</span><span>System Design</span><span>Figma</span><span>Jira</span><span>Cursor</span><span>Claude Code</span>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="about-image">
-                    <div class="image-frame">
-                        <picture>
-                            <source srcset="assets/profile_pic.webp" type="image/webp">
-                            <img src="assets/profile_pic.jpg" alt="Daksh Godara" width="546" height="700" loading="lazy">
-                        </picture>
-                    </div>
-                    <div class="image-decoration" aria-hidden="true"></div>
-                </div>
-            </div>
+                </div>            </div>
         </div>
     </section>
 
-    <!-- Experience Section -->
+    <!-- Experience -->
     <section class="section experience" id="experience">
         <div class="container">
-            <h2 class="section-title">
-                <span class="title-number">02.</span>
-                Experience
-            </h2>
+            <p class="section-eyebrow"><span class="section-num">02</span> / experience</p>
 
-            <!-- Full-time -->
-            <div class="experience-category">
-                <h3 class="category-title">
-                    <span class="category-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-                        </svg>
-                    </span>
-                    Full-time
-                </h3>
-                <div class="timeline">
-                    <!-- PM -->
-                    <div class="timeline-item" data-aos="fade-up">
-                        <div class="timeline-marker">
-                            <span class="marker-dot"></span>
-                        </div>
-                        <div class="timeline-content">
-                            <div class="timeline-header">
-                                <div class="timeline-role">
-                                    <h3>Product Manager</h3>
-                                    <a href="https://www.indmoney.com" target="_blank" class="company-link">
-                                        @ INDmoney
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
-                                        </svg>
-                                    </a>
-                                </div>
-                                <span class="timeline-date">Jun 2025 - Present</span>
-                            </div>
-                            <p class="timeline-summary">Leading 0→1 fintech, insurance and AI products at INDmoney — owning discovery, roadmap, GTM, CRM workflows and execution with engineering, design, sales and operations teams.</p>
-                            <div class="project-highlights">
-                                <div class="project-highlight">
-                                    <h4>Term Life Insurance</h4>
-                                    <p>Owned INDmoney’s term life insurance funnel end-to-end — insurer integrations, recommendation journeys, riders/add-ons, CRM workflows and sales-agent tooling across ICICI Prudential, Bajaj Life, Tata AIA and Axis Max Life.</p>
-                                    <div class="metrics">
-                                        <span class="metric"><strong>3rd largest</strong> digital aggregator by revenue in India</span>
-                                        <span class="metric">Among India’s highest <strong>term-life funnel conversion rates</strong></span>
-                                        <span class="metric">End-to-end CRM supporting <strong>50+ sales agents</strong></span>
-                                        <span class="metric"><strong>30%</strong> increase in call connectivity via auto-dialer</span>
-                                        <span class="metric">Higher ATV through <strong>riders/add-ons</strong></span>
-                                    </div>
-                                </div>
-
-                                <div class="project-highlight">
-                                    <h4>AI Insurance Assistant</h4>
-                                    <p>Built a workflow-based insurance assistant powered by RAG, tool integrations and a complete policy knowledge base — handling application support, family-cover recommendations, plan comparisons, policy wording explanations and FAQs across the life insurance journey.</p>
-                                    <div class="metrics">
-                                        <span class="metric">Improved <strong>DIY funnel completion</strong></span>
-                                        <span class="metric"><strong>20%</strong> reduction in support queries</span>
-                                        <span class="metric">Tool-integrated workflows for <strong>policy and application support</strong></span>
-                                    </div>
-                                </div>
-
-                                <div class="project-highlight">
-                                    <h4>Financial Goals Feature</h4>
-                                    <p>Built goal-based investing journeys that help users define long-term goals, map time horizons and invest across asset classes including SIPs and wealth products.</p>
-                                    <div class="metrics">
-                                        <span class="metric">Higher <strong>long-term retention</strong></span>
-                                        <span class="metric">Increased <strong>SIP adoption</strong></span>
-                                        <span class="metric">Improved <strong>AUM per user</strong></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- APM -->
-                    <div class="timeline-item" data-aos="fade-up">
-                        <div class="timeline-marker">
-                            <span class="marker-dot"></span>
-                        </div>
-                        <div class="timeline-content">
-                            <div class="timeline-header">
-                                <div class="timeline-role">
-                                    <h3>Associate Product Manager</h3>
-                                    <a href="https://www.indmoney.com" target="_blank" class="company-link">
-                                        @ INDmoney
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
-                                        </svg>
-                                    </a>
-                                </div>
-                                <span class="timeline-date">Sep 2023 - May 2025</span>
-                            </div>
-                            <div class="project-highlights">
-                                <div class="project-highlight">
-                                    <h4>INDwheels — Vehicle Tracking + Motor Insurance</h4>
-                                    <p>Built a vehicle garage for users to track vehicle value, insurance, PUCC, FASTag and challans, then layered motor insurance aggregation across Tata, ICICI, GoDigit and Kotak.</p>
-                                    <div class="metrics">
-                                        <span class="metric"><strong>1M+</strong> active vehicles tracked</span>
-                                        <span class="metric">Industry-leading <strong>motor insurance conversion rates</strong></span>
-                                        <span class="metric">Created repeat-engagement utility before <strong>insurance monetization</strong></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+            <div class="xp-item reveal">
+                <div class="xp-meta">
+                    <span class="xp-date">Jun 2025 - Present</span>
+                    <span class="xp-kind">Full-time</span>
                 </div>
-            </div>
-
-            <!-- Startup -->
-            <div class="experience-category">
-                <h3 class="category-title">
-                    <span class="category-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                        </svg>
-                    </span>
-                    Startup
-                </h3>
-                <div class="timeline">
-                    <div class="timeline-item" data-aos="fade-up">
-                        <div class="timeline-marker">
-                            <span class="marker-dot"></span>
-                        </div>
-                        <div class="timeline-content"> 
-                            <div class="timeline-header">
-                                <div class="timeline-role">
-                                    <h3>Co-Founder</h3>
-                                    <span class="company-link">@ 8Bins</span>
-                                </div>
-                                <span class="timeline-date">Aug 2020 - Dec 2022</span>
-                            </div>
-                            <ul class="timeline-details">
-                                <li>Co-founded an IoT + computer vision startup for smart waste management</li>
-                                <li>Built waste-classification workflows using OpenCV and computer vision</li>
-                                <li>Designed hardware/software prototype for automated waste segregation</li>
-                                <li>Top 12 at NASSCOM CienaHack 2020; mentored by <a href="https://www.padup.in/" target="_blank" class="company-link">PadUp Ventures</a></li>
+                <div class="xp-body">
+                    <h3>Product Manager <a href="https://www.indmoney.com" target="_blank" rel="noopener" class="co">@ INDmoney</a></h3>
+                    <p class="xp-summary">Leading 0→1 fintech and AI products end to end: discovery, roadmap, GTM, CRM workflows and execution with engineering, design, sales and ops.</p>
+                    <div class="xp-highlights">
+                        <div class="hl">
+                            <h4>Term Life Insurance</h4>
+                            <p>Owned the term life funnel end to end: insurer integrations (ICICI Pru, Bajaj, Tata AIA, Axis Max), recommendation journeys, riders, CRM and sales tooling.</p>
+                            <ul class="metrics">
+                                <li><b>3rd largest</b> digital aggregator by revenue in India</li>
+                                <li>Among India's highest <b>term‑life funnel conversion</b></li>
+                                <li>CRM for <b>50+ agents</b>, <b>+30%</b> call connectivity via auto‑dialer</li>
                             </ul>
-                            <div class="timeline-tags">
-                                <span class="tag">IoT</span>
-                                <span class="tag">Computer Vision</span>
-                                <span class="tag">OpenCV</span>
-                                <span class="tag">Startup</span>
-                                
-                            </div>
+                        </div>
+                        <div class="hl">
+                            <h4>AI Insurance Assistant</h4>
+                            <p>Built a workflow‑based assistant on RAG + tool integrations over a full policy knowledge base, covering application support, family‑cover recos, plan comparisons and FAQs.</p>
+                            <ul class="metrics">
+                                <li>Improved <b>DIY funnel completion</b></li>
+                                <li><b>−20%</b> support queries</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Internships -->
-            <div class="experience-category">
-                <h3 class="category-title">
-                    <span class="category-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-                            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
-                        </svg>
-                    </span>
-                    Internships
-                </h3>
-                <div class="timeline">
-                    <!-- INDmoney Intern -->
-                    <div class="timeline-item" data-aos="fade-up">
-                        <div class="timeline-marker">
-                            <span class="marker-dot"></span>
-                        </div>
-                        <div class="timeline-content">
-                            <div class="timeline-header">
-                                <div class="timeline-role">
-                                    <h3>Product Intern</h3>
-                                    <a href="https://www.indmoney.com" target="_blank" class="company-link">
-                                        @ INDmoney
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
-                                        </svg>
-                                    </a>
-                                </div>
-                                <span class="timeline-date">Jun - Aug 2023</span>
-                            </div>
-                            <div class="project-highlights">
-                                <div class="project-highlight">
-                                    <h4>Priority Circle (Premium Product)</h4>
-                                    <p>Built member-only experience for UHNI users with Private Banker assignment, appointment booking and financial planning journeys across app + CRM.</p>
-                                    <div class="metrics">
-                                        <span class="metric"><strong>2.5×</strong> higher ARPU vs regular users</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Monster.com -->
-                    <div class="timeline-item" data-aos="fade-up">
-                        <div class="timeline-marker">
-                            <span class="marker-dot"></span>
-                        </div>
-                        <div class="timeline-content">
-                            <div class="timeline-header">
-                                <div class="timeline-role">
-                                    <h3>Product Quality Intern</h3>
-                                    <a href="https://www.foundit.in" target="_blank" class="company-link">
-                                        @ Monster.com (foundit)
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
-                                        </svg>
-                                    </a>
-                                </div>
-                                <span class="timeline-date">Apr - May 2023</span>
-                            </div>
-                            <ul class="timeline-details">
-                                <li>Managed testing workflows and quality assurance processes</li>
-                                <li>Utilized SQL and Grafana for data analysis and monitoring</li>
-                                <li>Collaborated with product and engineering teams</li>
+            <div class="xp-item reveal">
+                <div class="xp-meta">
+                    <span class="xp-date">Sep 2023 - May 2025</span>
+                    <span class="xp-kind">Full-time</span>
+                </div>
+                <div class="xp-body">
+                    <h3>Associate Product Manager <a href="https://www.indmoney.com" target="_blank" rel="noopener" class="co">@ INDmoney</a></h3>
+                    <div class="xp-highlights">
+                        <div class="hl">
+                            <h4>INDwheels: Vehicle Garage + Motor Insurance</h4>
+                            <p>Built a vehicle garage to track value, insurance, PUCC, FASTag and challans, then layered motor‑insurance aggregation (Tata, ICICI, GoDigit, Kotak) on top.</p>
+                            <ul class="metrics">
+                                <li><b>1M+</b> active vehicles tracked</li>
+                                <li>Industry‑leading <b>motor insurance conversion</b></li>
+                                <li>Built repeat‑engagement utility before <b>monetization</b></li>
                             </ul>
-                            <div class="timeline-tags">
-                                <span class="tag">SQL</span>
-                                <span class="tag">Grafana</span>
-                                <span class="tag">QA</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- NioClass -->
-                    <div class="timeline-item" data-aos="fade-up">
-                        <div class="timeline-marker">
-                            <span class="marker-dot"></span>
-                        </div>
-                        <div class="timeline-content">
-                            <div class="timeline-header">
-                                <div class="timeline-role">
-                                    <h3>Product Intern</h3>
-                                    <span class="company-link">@ NioClass</span>
-                                </div>
-                                <span class="timeline-date">Feb - Mar 2023</span>
-                            </div>
-                            <ul class="timeline-details">
-                                <li>Launched a math practice module for the edtech platform</li>
-                                <li>Used OpenAI APIs for Q&A generation, QA and difficulty calibration</li>
-                                <li>Contributed to product feature development and user research</li>
-                            </ul>
-                            <div class="timeline-tags">
-                                <span class="tag">EdTech</span>
-                                <span class="tag">Product</span>
-                                <span class="tag">OpenAI APIs</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- KravinGo -->
-                    <!-- <div class="timeline-item" data-aos="fade-up">
-                        <div class="timeline-marker">
-                            <span class="marker-dot"></span>
-                        </div>
-                        <div class="timeline-content">
-                            <div class="timeline-header">
-                                <div class="timeline-role">
-                                    <h3>Backend Developer Intern</h3>
-                                    <span class="company-link">@ KravinGo</span>
-                                </div>
-                                <span class="timeline-date">Nov - Dec 2022</span>
-                            </div>
-                            <ul class="timeline-details">
-                                <li>Developed Django backend architecture</li>
-                                <li>Built RESTful APIs for the platform</li>
-                            </ul>
-                            <div class="timeline-tags">
-                                <span class="tag">Django</span>
-                                <span class="tag">REST APIs</span>
-                            </div>
-                        </div>
-                    </div> -->
-
-                    <!-- Physics Wallah -->
-                    <div class="timeline-item" data-aos="fade-up">
-                        <div class="timeline-marker">
-                            <span class="marker-dot"></span>
-                        </div>
-                        <div class="timeline-content">
-                            <div class="timeline-header">
-                                <div class="timeline-role">
-                                    <h3>Summer Intern</h3>
-                                    <a href="https://www.pw.live" target="_blank" class="company-link">
-                                        @ Physics Wallah
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
-                                        </svg>
-                                    </a>
-                                </div>
-                                <span class="timeline-date">Jun - Aug 2022</span>
-                            </div>
-                            <ul class="timeline-details">
-                                <li>Product quality validation at India's leading edtech unicorn</li>
-                                <li>Worked on improving user experience and platform quality</li>
-                                <li>Collaborated with engineering teams to identify UX and reliability issues</li>
-                            </ul>
-                            <div class="timeline-tags">
-                                <span class="tag">EdTech</span>
-                                <span class="tag">Product Quality</span>
-                                <span class="tag">QA</span>
-                                <span class="tag">UX</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- MCG DTU -->
-                    <div class="timeline-item" data-aos="fade-up">
-                        <div class="timeline-marker">
-                            <span class="marker-dot"></span>
-                        </div>
-                        <div class="timeline-content">
-                            <div class="timeline-header">
-                                <div class="timeline-role">
-                                    <h3>Research Intern</h3>
-                                    <span class="company-link">@ MCG, DTU</span>
-                                </div>
-                                <span class="timeline-date">Jul - Aug 2020</span>
-                            </div>
-                            <ul class="timeline-details">
-                                <li>Worked on image processing and computer vision for remote sensing data</li>
-                                <li>Applied computer vision techniques to satellite imagery</li>
-                            </ul>
-                            <div class="timeline-tags">
-                                <span class="tag">Research</span>
-                                <span class="tag">Image Processing</span>
-                                <span class="tag">Computer Vision</span>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Projects Section -->
-    <section class="section projects" id="projects">
-        <div class="container">
-            <h2 class="section-title">
-                <span class="title-number">03.</span>
-                Projects
-            </h2>
-            <!-- <div class="projects-filter">
-                <button class="filter-btn active" data-filter="all">All Projects</button>
-                <button class="filter-btn" data-filter="startup">Startup</button>
-                <button class="filter-btn" data-filter="independent">Independent</button>
-            </div> -->
-            <div class="projects-grid">
-                <!-- Arbiter -->
-                <div class="project-card" data-category="ai fintech">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M9 11l3 3L22 4"/>
-                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <h3 class="project-title">Arbiter — Agentic Trading Decision System</h3>
-                    <p class="project-description">
-                        Agentic trading copilot for Indian retail traders that turns every trade idea into a structured decision card — thesis, risk, invalidation, market context and post-trade feedback.
-                    </p>
-                    <div class="project-impact">
-                        <span class="impact-label">Role:</span>
-                        <span class="impact-value">Founder / Product Builder</span>
-                    </div>
-                    <div class="project-tags">
-                        <span>Agentic AI</span>
-                        <span>Trading</span>
-                        <span>Risk Systems</span>
-                        <span>Indian Markets</span>
-                    </div>
+            <div class="xp-item reveal">
+                <div class="xp-meta">
+                    <span class="xp-date">Aug 2020 - Dec 2022</span>
+                    <span class="xp-kind">Startup</span>
                 </div>
-
-                <!-- SunSeat -->
-                <div class="project-card" data-category="ai product">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <circle cx="12" cy="12" r="4"/>
-                                <path d="M12 2v2"/>
-                                <path d="M12 20v2"/>
-                                <path d="M4.93 4.93l1.41 1.41"/>
-                                <path d="M17.66 17.66l1.41 1.41"/>
-                                <path d="M2 12h2"/>
-                                <path d="M20 12h2"/>
-                                <path d="M6.34 17.66l-1.41 1.41"/>
-                                <path d="M19.07 4.93l-1.41 1.41"/>
-                            </svg>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/dakshgodara2001/sunSeat" target="_blank" class="project-link" title="GitHub" aria-label="View source on GitHub">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                    <h3 class="project-title">SunSeat — Route-based Seat Recommendation Engine</h3>
-                    <p class="project-description">
-                        Seat recommendation engine that uses route geometry, departure time and real solar-position math to suggest the least-sunny seat for a car ride.
-                    </p>
-                    <div class="project-impact">
-                        <span class="impact-label">Role:</span>
-                        <span class="impact-value">Built productized API + UI with exposure scoring</span>
-                    </div>
-                    <div class="project-tags">
-                        <span>Python</span>
-                        <span>FastAPI</span>
-                        <span>Route Intelligence</span>
-                        <span>Recommendation Engine</span>
-                    </div>
-                </div>
-
-                <!-- Market Intelligence Automation -->
-                <div class="project-card" data-category="fintech automation">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-                            </svg>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/dakshgodara2001/Stock-Monitoring-Platform" target="_blank" class="project-link" title="GitHub" aria-label="View source on GitHub">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                    <h3 class="project-title">NSE/BSE Market Intelligence Automation</h3>
-                    <p class="project-description">
-                        Automated Indian market scanner focused on Nifty 50, Bank Nifty and underlying constituents — combining technical signals, sector context, fundamentals and pre-market cues into actionable watchlists.
-                    </p>
-                    <div class="project-impact">
-                        <span class="impact-label">Role:</span>
-                        <span class="impact-value">Built daily market intelligence workflow</span>
-                    </div>
-                    <div class="project-tags">
-                        <span>Python</span>
-                        <span>Market Data</span>
-                        <span>Automation</span>
-                        <span>NSE/BSE</span>
-                    </div>
-                </div>
-
-                <!-- Room Check Crawler -->
-                <div class="project-card" data-category="automation">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 1 1 18 0z"/>
-                                <circle cx="12" cy="10" r="3"/>
-                                <path d="M17 18l4 4"/>
-                            </svg>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/dakshgodara2001/room-check-crawler" target="_blank" class="project-link" title="GitHub" aria-label="View source on GitHub">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                    <h3 class="project-title">Room Check Crawler</h3>
-                    <p class="project-description">
-                        Playwright-based crawler that checks guest house availability across locations and sends Telegram alerts when rooms open up.
-                    </p>
-                    <div class="project-impact">
-                        <span class="impact-label">Role:</span>
-                        <span class="impact-value">Automated a repetitive manual search workflow</span>
-                    </div>
-                    <div class="project-tags">
-                        <span>Python</span>
-                        <span>Playwright</span>
-                        <span>Automation</span>
-                        <span>Telegram Alerts</span>
-                    </div>
-                </div>
-
-                <!-- 8Bins -->
-                <div class="project-card" data-category="startup">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-                                <line x1="12" y1="22.08" x2="12" y2="12"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <h3 class="project-title">8Bins — Smart Waste Management</h3>
-                    <p class="project-description">
-                        Co-founded an IoT + computer vision startup for automated waste segregation, combining hardware prototyping with OpenCV-based waste classification workflows.
-                    </p>
-                    <div class="project-impact">
-                        <span class="impact-label">Impact:</span>
-                        <span class="impact-value">Top 12 at NASSCOM CienaHack; mentored by PadUp Ventures</span>
-                    </div>
-                    <div class="project-tags">
-                        <span>Startup</span>
-                        <span>IoT</span>
-                        <span>Computer Vision</span>
-                        <span>OpenCV</span>
-                    </div>
-                </div>
-
-                <!-- AI Models vs Developer Activity -->
-                <div class="project-card" data-category="ai data">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/>
-                                <polyline points="22 2 22 8 16 8"/>
-                                <path d="M12 7v5l3 3"/>
-                            </svg>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/dakshgodara2001/ai-models-vs-commits" target="_blank" class="project-link" title="GitHub" aria-label="View source on GitHub">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                    <h3 class="project-title">AI Models vs Developer Activity</h3>
-                    <p class="project-description">
-                        Time-series research project analyzing whether major LLM releases correlate with changes in GitHub commit activity and developer behavior patterns.
-                    </p>
-                    <div class="project-impact">
-                        <span class="impact-label">Role:</span>
-                        <span class="impact-value">Independent data analysis using GitHub activity data</span>
-                    </div>
-                    <div class="project-tags">
-                        <span>Python</span>
-                        <span>Data Analysis</span>
-                        <span>AI Research</span>
-                        <span>GitHub API</span>
-                    </div>
+                <div class="xp-body">
+                    <h3>Co-Founder <span class="co">@ 8Bins</span></h3>
+                    <p class="xp-summary">Co‑founded an IoT + computer‑vision startup for smart waste segregation, with a hardware and software prototype for OpenCV waste classification.</p>
+                    <ul class="metrics">
+                        <li>Top 12 at <b>NASSCOM CienaHack 2020</b></li>
+                        <li>Mentored by <a href="https://www.padup.in/" target="_blank" rel="noopener">PadUp Ventures</a></li>
+                    </ul>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Education Section -->
-    <section class="section education" id="education">
-        <div class="container">
-            <h2 class="section-title">
-                <span class="title-number">04.</span>
-                Education
-            </h2>
-            <div class="education-grid">
-                <div class="education-card">
-                    <div class="education-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-                            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
-                        </svg>
-                    </div>
-                    <div class="education-content">
-                        <h3>Bachelor of Technology</h3>
-                        <p class="education-field">Electrical Engineering</p>
-                        <p class="education-school">NSIT, Delhi</p>
-                        <p class="education-year">2019 - 2023</p>
-                        <div class="education-highlights">
-                            <span>CGPA: 7.3/10</span>
-                            <span>Top 20% in Department</span>
-                        </div>
-                    </div>
+            <div class="xp-item reveal">
+                <div class="xp-meta">
+                    <span class="xp-date">2020 - 2023</span>
+                    <span class="xp-kind">Internships</span>
                 </div>
-
-                <div class="certifications-card achievements-summary-card">
-                    <div class="achievements-summary-header">
-                        <div>
-                            <span class="eyebrow">Beyond Work</span>
-                            <h3>Other Achievements</h3>
-                        </div>
-                        <div class="achievement-count">4</div>
-                    </div>
-                    <ul class="cert-list achievement-list">
-                        <li>
-                            <span class="achievement-badge">01</span>
-                            <div class="achievement-copy">
-                                <span class="cert-name">JEE Advanced Top 1%</span>
-                                <span class="cert-issuer">AIR 13,900 | 99.98 %ile in Mathematics</span>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="achievement-badge">02</span>
-                            <div class="achievement-copy">
-                                <span class="cert-name">NCC Air Force "A" Certificate</span>
-                                <span class="cert-issuer">Completed National Cadet Corps Air Wing training</span>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="achievement-badge">03</span>
-                            <div class="achievement-copy">
-                                <span class="cert-name">State-level Swimming</span>
-                                <span class="cert-issuer">Represented district in state-level tournaments</span>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="achievement-badge">04</span>
-                            <div class="achievement-copy">
-                                <span class="cert-name">Competitive Squash Player</span>
-                                <span class="cert-issuer">Represented my club in competitive squash tournaments</span>
-                            </div>
-                        </li>
+                <div class="xp-body">
+                    <h3>Earlier: Product &amp; Research Internships</h3>
+                    <ul class="intern-list">
+                        <li><b>Product Intern, INDmoney</b>: built <em>Priority Circle</em>, a UHNI member experience with private‑banker assignment and planning journeys. <span class="pill">2.5× ARPU vs regular users</span></li>
+                        <li><b>Product Quality Intern, Monster.com (foundit)</b>: QA workflows with SQL and Grafana monitoring.</li>
+                        <li><b>Summer Intern, Physics Wallah</b>: product quality and UX validation at India's leading edtech unicorn.</li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-
-    <!-- Connect Section -->
-    <section class="section connect" id="connect">
+    <!-- Projects -->
+    <section class="section projects" id="projects">
         <div class="container">
-            <h2 class="section-title">
-                <span class="title-number">05.</span>
-                Let's Connect
-            </h2>
-            <div class="connect-content">
-                <div class="connect-text">
-                    <p class="connect-intro">
-                        I'm always interested in hearing about new opportunities, interesting projects,
-                        or just having a chat about product, tech, and startups.
-                    </p>
-                    <p>
-                        Whether you want to collaborate on a project, discuss product ideas, or just say hi,
-                        feel free to reach out!
-                    </p>
-                </div>
-                <div class="connect-links">
-                    <a href="mailto:godaradaksh2001@gmail.com" class="connect-card">
-                        <div class="connect-icon">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                                <polyline points="22,6 12,13 2,6"/>
-                            </svg>
-                        </div>
-                        <div class="connect-info">
-                            <span class="connect-label">Email</span>
-                            <span class="connect-value">godaradaksh2001@gmail.com</span>
-                        </div>
-                    </a>
+            <p class="section-eyebrow"><span class="section-num">03</span> / projects</p>
+            <div class="proj-grid">
+                <article class="proj-card reveal">
+                    <header class="proj-head">
+                        <span class="proj-tick">◆</span>
+                        <a href="https://github.com/dakshgodara2001/gpu-inference" target="_blank" rel="noopener" class="proj-gh" aria-label="GitHub">GitHub ↗</a>
+                    </header>
+                    <h3>GPU Inference Economics</h3>
+                    <p>Rented a single H100, served Qwen2.5-7B on vLLM, and benchmarked it as a vendor (synthetic load) and a customer (a real research agent). Cost per million tokens swung 45×, from $5.89 to $0.13, set almost entirely by how full the card was kept.</p>
+                    <div class="proj-tags"><span>vLLM</span><span>H100</span><span>LLM Serving</span><span>Benchmarks</span></div>
+                </article>
 
-                    <a href="https://linkedin.com/in/daksh-godara-2001" target="_blank" class="connect-card">
-                        <div class="connect-icon">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                            </svg>
-                        </div>
-                        <div class="connect-info">
-                            <span class="connect-label">LinkedIn</span>
-                            <span class="connect-value">/in/daksh-godara-2001</span>
-                        </div>
-                    </a>
+                <article class="proj-card reveal">
+                    <header class="proj-head">
+                        <span class="proj-tick">◆</span>
+                        <span class="proj-role">Founder / Builder</span>
+                    </header>
+                    <h3>Arbiter: Agentic Trading Decisions</h3>
+                    <p>An agentic copilot for Indian retail traders that turns every trade idea into a structured decision card: thesis, risk, invalidation, market context and post‑trade feedback.</p>
+                    <div class="proj-tags"><span>Agentic AI</span><span>Trading</span><span>Risk Systems</span></div>
+                </article>
 
-                    <a href="https://github.com/dakshgodara2001" target="_blank" class="connect-card">
-                        <div class="connect-icon">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                            </svg>
-                        </div>
-                        <div class="connect-info">
-                            <span class="connect-label">GitHub</span>
-                            <span class="connect-value">dakshgodara2001</span>
-                        </div>
-                    </a>
+                <article class="proj-card reveal">
+                    <header class="proj-head">
+                        <span class="proj-tick">◆</span>
+                        <a href="https://github.com/dakshgodara2001/sunSeat" target="_blank" rel="noopener" class="proj-gh" aria-label="GitHub">GitHub ↗</a>
+                    </header>
+                    <h3>SunSeat: Sunniest‑Seat Engine</h3>
+                    <p>A seat‑recommendation engine using route geometry, departure time and real solar‑position math to pick the least‑sunny seat for a car ride.</p>
+                    <div class="proj-tags"><span>Python</span><span>FastAPI</span><span>Recommendation</span></div>
+                </article>
 
-                    <a href="https://x.com/daksh1x3" target="_blank" class="connect-card">
-                        <div class="connect-icon">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                            </svg>
-                        </div>
-                        <div class="connect-info">
-                            <span class="connect-label">X (Twitter)</span>
-                            <span class="connect-value">@daksh1x3</span>
-                        </div>
-                    </a>
-                </div>
-                <a href="assets/res_tdyg.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
-                    </svg>
-                    <span>View My Resume</span>
-                </a>
+                <article class="proj-card reveal">
+                    <header class="proj-head">
+                        <span class="proj-tick">◆</span>
+                        <a href="https://github.com/dakshgodara2001/Stock-Monitoring-Platform" target="_blank" rel="noopener" class="proj-gh" aria-label="GitHub">GitHub ↗</a>
+                    </header>
+                    <h3>NSE/BSE Market Intelligence</h3>
+                    <p>An automated Indian‑market scanner over Nifty 50, Bank Nifty and constituents, fusing technical signals, sector context, fundamentals and pre‑market cues into watchlists.</p>
+                    <div class="proj-tags"><span>Python</span><span>Market Data</span><span>Automation</span></div>
+                </article>
+
+                <article class="proj-card reveal">
+                    <header class="proj-head">
+                        <span class="proj-tick">◆</span>
+                        <span class="proj-role">Startup</span>
+                    </header>
+                    <h3>8Bins: Smart Waste Management</h3>
+                    <p>Co‑founded an IoT + computer‑vision startup for automated waste segregation, pairing hardware prototyping with OpenCV classification workflows.</p>
+                    <div class="proj-tags"><span>IoT</span><span>Computer Vision</span><span>OpenCV</span></div>
+                </article>
+
+                <article class="proj-card reveal">
+                    <header class="proj-head">
+                        <span class="proj-tick">◆</span>
+                        <a href="https://github.com/dakshgodara2001/ai-models-vs-commits" target="_blank" rel="noopener" class="proj-gh" aria-label="GitHub">GitHub ↗</a>
+                    </header>
+                    <h3>AI Models vs Developer Activity</h3>
+                    <p>A time‑series study of whether major LLM releases correlate with shifts in GitHub commit activity and developer behaviour.</p>
+                    <div class="proj-tags"><span>Python</span><span>Data Analysis</span><span>GitHub API</span></div>
+                </article>
             </div>
         </div>
     </section>
 
+    <!-- Education -->
+    <section class="section education" id="education">
+        <div class="container">
+            <p class="section-eyebrow"><span class="section-num">04</span> / education &amp; beyond</p>
+            <div class="edu-grid">
+                <div class="edu-card reveal">
+                    <h3>B.Tech, Electrical Engineering</h3>
+                    <p class="edu-school">NSIT, Delhi · 2019 - 2023</p>
+                    <div class="edu-tags"><span>Top 20% in Dept.</span></div>
+                </div>
+                <div class="edu-card achievements reveal">
+                    <p class="ach-eyebrow">Beyond work</p>
+                    <ul class="ach-list">
+                        <li><b>JEE Advanced, Top 1%</b><span>99.98 %ile in Mathematics</span></li>
+                        <li><b>NCC Air Force "A" Certificate</b><span>National Cadet Corps, Air Wing</span></li>
+                        <li><b>State‑level Swimming</b><span>Represented district in state tournaments</span></li>
+                        <li><b>Competitive Squash</b><span>Played club‑level squash tournaments</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Connect -->
+    <section class="section connect" id="connect">
+        <div class="container">
+            <p class="section-eyebrow"><span class="section-num">05</span> / connect</p>
+            <div class="connect-grid">
+                <div class="connect-text reveal">
+                    <h2 class="connect-head">Let's build something <span class="serif">worth a story.</span></h2>
+                    <p>Whether it's product, fintech, AI or just a good idea, I'm always up for a conversation. Reach out and say hi.</p>
+                    <a href="assets/res_tdyg.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Download résumé ↗</a>
+                </div>
+                <div class="connect-links reveal">
+                    <a href="mailto:godaradaksh2001@gmail.com" class="connect-card">
+                        <span class="connect-label">Email</span>
+                        <span class="connect-value">godaradaksh2001@gmail.com</span>
+                    </a>
+                    <a href="https://linkedin.com/in/daksh-godara-2001" target="_blank" rel="noopener" class="connect-card">
+                        <span class="connect-label">LinkedIn</span>
+                        <span class="connect-value">/in/daksh-godara-2001</span>
+                    </a>
+                    <a href="https://github.com/dakshgodara2001" target="_blank" rel="noopener" class="connect-card">
+                        <span class="connect-label">GitHub</span>
+                        <span class="connect-value">dakshgodara2001</span>
+                    </a>
+                    <a href="https://x.com/daksh1x3" target="_blank" rel="noopener" class="connect-card">
+                        <span class="connect-label">X (Twitter)</span>
+                        <span class="connect-value">@daksh1x3</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    </main>
+
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <p class="footer-text">
-                    Vibe-Coded by <span class="highlight">Daksh Godara</span>
-                </p>
-                <!-- <p class="footer-copyright">
-                    &copy; 2024 All rights reserved.
-                </p> -->
-            </div>
-            <a href="#home" class="back-to-top" id="back-to-top" aria-label="Back to top">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 19V5M5 12l7-7 7 7"/>
-                </svg>
-            </a>
+        <div class="container footer-inner">
+            <p class="footer-text">Vibe‑coded by <span class="serif">Daksh Godara</span>. And yes, that's a real slingshot. 🪁</p>
+            <a href="#home" class="back-to-top" data-fire="off" aria-label="Back to top">↑ top</a>
         </div>
     </footer>
+
+    <!-- Celebration song: drop a clip named two-birds-one-stone.mp3 in /assets to enable -->
+    <audio id="celebration-song" preload="auto">
+        <source src="assets/two-birds-one-stone.mp3" type="audio/mpeg">
+    </audio>
 
     <!-- Scripts -->
     <script src="js/main.js"></script>

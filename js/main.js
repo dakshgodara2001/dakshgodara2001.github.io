@@ -1,268 +1,403 @@
-// ===== Typing Animation =====
-const typingText = document.getElementById('typing-text');
-const name = 'Daksh Godara';
-let charIndex = 0;
+/* =========================================================
+   Daksh Godara — portfolio interactions
+   + "Killing two birds with one stone" slingshot mini-game
+   ========================================================= */
+(() => {
+  'use strict';
 
-function typeWriter() {
-    if (charIndex < name.length) {
-        typingText.textContent += name.charAt(charIndex);
-        charIndex++;
-        setTimeout(typeWriter, 100);
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finePointer  = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const rand = (a, b) => a + Math.random() * (b - a);
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+
+  /* ---------------------------------------------------------
+     Theme toggle
+     --------------------------------------------------------- */
+  const root = document.documentElement;
+  const themeToggle = document.getElementById('theme-toggle');
+  const stored = localStorage.getItem('theme');
+  if (stored) root.setAttribute('data-theme', stored);
+
+  function themeMode() {
+    const t = root.getAttribute('data-theme');
+    if (t) return t;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  function syncToggleIcon() {
+    themeToggle && themeToggle.classList.toggle('is-dark', themeMode() === 'dark');
+  }
+  syncToggleIcon();
+
+  themeToggle && themeToggle.addEventListener('click', () => {
+    const next = themeMode() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    syncToggleIcon();
+    refreshThemeColors();
+  });
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+    if (!root.getAttribute('data-theme')) { syncToggleIcon(); refreshThemeColors(); }
+  });
+
+  /* ---------------------------------------------------------
+     Navbar: scrolled state, mobile menu, active link
+     --------------------------------------------------------- */
+  const navbar    = document.getElementById('navbar');
+  const navToggle = document.getElementById('nav-toggle');
+  const navMenu   = document.getElementById('nav-menu');
+
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+
+  navToggle && navToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('open');
+    navToggle.classList.toggle('open');
+  });
+  navMenu && navMenu.querySelectorAll('.nav-link').forEach(l =>
+    l.addEventListener('click', () => {
+      navMenu.classList.remove('open');
+      navToggle.classList.remove('open');
+    })
+  );
+
+  const navLinks = [...document.querySelectorAll('.nav-link')];
+  const sections = navLinks
+    .map(l => document.querySelector(l.getAttribute('href')))
+    .filter(Boolean);
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = '#' + e.target.id;
+        navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === id));
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  sections.forEach(s => spy.observe(s));
+
+  /* ---------------------------------------------------------
+     Reveal on scroll
+     --------------------------------------------------------- */
+  const revealObs = new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+  /* ---------------------------------------------------------
+     Game HUD
+     --------------------------------------------------------- */
+  const hud         = document.getElementById('game-hud');
+  const hudClose    = document.getElementById('game-hud-close');
+  const scoreBirds  = document.getElementById('score-birds');
+  const scoreDouble = document.getElementById('score-doubles');
+  const congrats    = document.getElementById('congrats');
+  const song        = document.getElementById('celebration-song');
+  const idiomNote   = document.getElementById('idiom-note');
+  hudClose && hudClose.addEventListener('click', () => hud.classList.add('hidden'));
+
+  // the "watch the comic" note only appears while a double's song plays
+  let comicTimer = null;
+  function showComic() {
+    if (!idiomNote) return;
+    idiomNote.classList.add('show');
+    const ms = (song && isFinite(song.duration) && song.duration > 0) ? song.duration * 1000 + 400 : 13000;
+    clearTimeout(comicTimer);
+    comicTimer = setTimeout(() => idiomNote.classList.remove('show'), ms);
+  }
+  song && song.addEventListener('ended', () => idiomNote && idiomNote.classList.remove('show'));
+
+  let birdsDown = 0, doubles = 0;
+  function updateScore() {
+    if (scoreBirds)  scoreBirds.textContent  = birdsDown;
+    if (scoreDouble) scoreDouble.textContent = doubles;
+  }
+
+  let songStop = null;
+  function playSong() {
+    if (!song) return;
+    try {
+      song.pause(); song.currentTime = 0; song.volume = 0.6;
+      const p = song.play(); if (p && p.catch) p.catch(() => {});
+      clearTimeout(songStop);
+      songStop = setTimeout(() => { try { song.pause(); } catch (e) {} }, 15000);
+    } catch (e) {}
+  }
+
+  let congratsTimer = null;
+  function celebrate(x, y) {
+    doubles++;
+    playSong();
+    showComic();
+    burstConfetti(x, y);
+    if (congrats) {
+      const lines = ['Two birds, one stone!', 'One stone, two birds. 🎯', 'Clean double!', 'Proverbially efficient.'];
+      congrats.querySelector('.congrats-text').textContent = lines[Math.min(doubles - 1, lines.length - 1)] || lines[0];
+      congrats.classList.add('show');
+      clearTimeout(congratsTimer);
+      congratsTimer = setTimeout(() => congrats.classList.remove('show'), 1900);
     }
-}
+  }
 
-// Start typing animation after page load
-window.addEventListener('load', () => {
-    setTimeout(typeWriter, 500);
-    document.body.classList.add('loaded');
-});
+  /* ---------------------------------------------------------
+     Slingshot cursor
+     --------------------------------------------------------- */
+  const sling = document.getElementById('slingshot');
+  const POUCH_X = 23, POUCH_Y = 25;     // pouch coords inside the 46×52 svg
+  let pointerVX = 0, lastPX = null;
 
-// ===== Mobile Navigation Toggle =====
-const navbar = document.getElementById('navbar');
-const navToggle = document.getElementById('nav-toggle');
-const navMenu = document.getElementById('nav-menu');
-const navLinks = document.querySelectorAll('.nav-link');
+  if (finePointer) {
+    document.body.classList.add('slingshot-ready');
+    window.addEventListener('pointermove', (e) => {
+      if (e.pointerType === 'touch') return;
+      sling.style.setProperty('--x', (e.clientX - POUCH_X) + 'px');
+      sling.style.setProperty('--y', (e.clientY - POUCH_Y) + 'px');
+      if (lastPX !== null) pointerVX = e.clientX - lastPX;
+      lastPX = e.clientX;
+    }, { passive: true });
+  }
 
-navToggle.addEventListener('click', () => {
-    navToggle.classList.toggle('active');
-    navMenu.classList.toggle('active');
-    document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
-});
+  function recoil() {
+    if (!finePointer) return;
+    sling.classList.remove('firing');
+    void sling.offsetWidth;            // restart animation
+    sling.classList.add('firing');
+  }
 
-// Close mobile menu when clicking a link
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        navToggle.classList.remove('active');
-        navMenu.classList.remove('active');
-        document.body.style.overflow = '';
-    });
-});
+  /* ---------------------------------------------------------
+     Canvas: birds, stones, particles
+     --------------------------------------------------------- */
+  const canvas = document.getElementById('sky');
+  const ctx = canvas.getContext('2d');
+  let W = 0, H = 0, dpr = 1;
 
-// ===== Consolidated Scroll Handler (single listener, rAF-throttled) =====
-const sections = document.querySelectorAll('section[id]');
-const heroSection = document.querySelector('.hero');
-const gridLines = document.querySelector('.grid-lines');
-const backToTop = document.getElementById('back-to-top');
-let scrollTicking = false;
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    canvas.width = Math.floor(W * dpr);
+    canvas.height = Math.floor(H * dpr);
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  resize();
+  window.addEventListener('resize', resize);
 
-function onScroll() {
-    const scrollY = window.pageYOffset;
+  // theme-dependent colours
+  let birdColor = '#2a2d33', confetti = [];
+  const confettiPalette = ['#e2674a', '#3b82c4', '#f4b942', '#5bbf8a', '#d65d8a', '#7c6cf0'];
+  function refreshThemeColors() {
+    birdColor = themeMode() === 'dark'
+      ? 'rgba(228, 224, 216, 0.55)'
+      : 'rgba(40, 44, 52, 0.62)';
+  }
+  refreshThemeColors();
 
-    // Navbar background
-    navbar.classList.toggle('scrolled', scrollY > 50);
+  const birds = [];
+  const stones = [];
+  const parts = [];                 // feathers + confetti
+  const TARGET_BIRDS = reduceMotion ? 5 : (W < 640 ? 7 : 11);
 
-    // Active nav link
-    sections.forEach(section => {
-        const sectionHeight = section.offsetHeight;
-        const sectionTop = section.offsetTop - 100;
-        const sectionId = section.getAttribute('id');
-        const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+  class Bird {
+    constructor(forceSide) {
+      const side = forceSide || (Math.random() < 0.5 ? 'L' : 'R');
+      this.dir = side === 'L' ? 1 : -1;
+      this.x = side === 'L' ? -50 : W + 50;
+      this.baseY = rand(54, H * 0.6);
+      this.y = this.baseY;
+      this.speed = rand(0.5, 1.4) * (reduceMotion ? 0.6 : 1);
+      this.size = rand(12, 22);
+      this.flap = rand(0, Math.PI * 2);
+      this.flapSpd = rand(0.12, 0.22);
+      this.bobAmp = reduceMotion ? 0 : rand(4, 12);
+      this.bobPhase = rand(0, Math.PI * 2);
+      this.dead = false; this.vy = 0; this.rot = 0; this.alpha = 1;
+    }
+    update() {
+      if (this.dead) {
+        this.vy += 0.45; this.y += this.vy;
+        this.x += this.dir * 0.4; this.rot += 0.22; this.alpha -= 0.012;
+        return;
+      }
+      this.x += this.dir * this.speed;
+      this.flap += this.flapSpd;
+      this.bobPhase += 0.02;
+      this.y = this.baseY + Math.sin(this.bobPhase) * this.bobAmp;
+    }
+    draw() {
+      const wing = Math.sin(this.flap) * 0.5 + 0.5;   // 0..1
+      const s = this.size, lift = (1 - wing) * s * 0.55;
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      if (this.dead) ctx.rotate(this.rot);
+      ctx.scale(this.dir, 1);
+      ctx.globalAlpha = clamp(this.alpha, 0, 1) * (this.dead ? 1 : 0.9);
+      ctx.strokeStyle = birdColor;
+      ctx.lineWidth = Math.max(1.4, s * 0.12);
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(-s, lift);
+      ctx.quadraticCurveTo(-s * 0.42, -s * 0.5 - lift, 0, 0);
+      ctx.quadraticCurveTo(s * 0.42, -s * 0.5 - lift, s, lift);
+      ctx.stroke();
+      ctx.restore();
+    }
+    gone() {
+      return this.dead ? (this.y > H + 70 || this.alpha <= 0) : (this.x < -90 || this.x > W + 90);
+    }
+    hit(px, py, r) {
+      if (this.dead) return false;
+      const dx = this.x - px, dy = this.y - py, rr = this.size * 0.9 + r + 6;
+      return dx * dx + dy * dy < rr * rr;
+    }
+    kill() { this.dead = true; this.vy = rand(-1, 1.5); }
+  }
 
-        if (navLink && scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                link.removeAttribute('aria-current');
-            });
-            navLink.classList.add('active');
-            navLink.setAttribute('aria-current', 'page');
+  class Stone {
+    constructor(x, y, vx) {
+      this.x = x; this.y = y;
+      this.vx = vx; this.vy = -13.5;
+      this.r = 4; this.kills = 0; this.celebrated = false;
+      this.trail = []; this.dead = false;
+    }
+    step() {
+      this.vy += 0.2;
+      const sub = 4, sx = this.vx / sub, sy = this.vy / sub;
+      for (let i = 0; i < sub && !this.dead; i++) {
+        this.x += sx; this.y += sy;
+        for (const b of birds) {
+          if (b.hit(this.x, this.y, this.r)) {
+            b.kill();
+            this.kills++; birdsDown++; updateScore();
+            featherPuff(b.x, b.y);
+            if (this.kills === 2 && !this.celebrated) { this.celebrated = true; celebrate(this.x, this.y); }
+          }
         }
-    });
+      }
+      this.trail.push({ x: this.x, y: this.y });
+      if (this.trail.length > 7) this.trail.shift();
+      if (this.y > H + 70 || this.y < -120 || this.x < -70 || this.x > W + 70) this.dead = true;
+    }
+    draw() {
+      for (let i = 0; i < this.trail.length; i++) {
+        const t = this.trail[i], a = (i / this.trail.length) * 0.35;
+        ctx.globalAlpha = a;
+        ctx.fillStyle = birdColor;
+        ctx.beginPath(); ctx.arc(t.x, t.y, this.r * (i / this.trail.length), 0, 7); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = themeMode() === 'dark' ? '#efe9df' : '#26282d';
+      ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, 7); ctx.fill();
+    }
+  }
 
-    // Back to top visibility
-    if (backToTop) {
-        const show = scrollY > 500;
-        backToTop.style.opacity = show ? '1' : '0';
-        backToTop.style.visibility = show ? 'visible' : 'hidden';
+  class Particle {
+    constructor(x, y, opt) {
+      this.x = x; this.y = y;
+      this.vx = opt.vx; this.vy = opt.vy;
+      this.g = opt.g; this.size = opt.size;
+      this.color = opt.color; this.life = 1; this.decay = opt.decay;
+      this.rot = rand(0, 7); this.vr = rand(-0.3, 0.3); this.shape = opt.shape;
+    }
+    update() { this.vy += this.g; this.x += this.vx; this.y += this.vy; this.vx *= 0.99; this.rot += this.vr; this.life -= this.decay; }
+    draw() {
+      ctx.globalAlpha = clamp(this.life, 0, 1);
+      ctx.fillStyle = this.color;
+      if (this.shape === 'rect') {
+        ctx.save(); ctx.translate(this.x, this.y); ctx.rotate(this.rot);
+        ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size * 0.5);
+        ctx.restore();
+      } else {
+        ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, 7); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  function featherPuff(x, y) {
+    if (reduceMotion) return;
+    for (let i = 0; i < 6; i++) {
+      parts.push(new Particle(x, y, {
+        vx: rand(-1.4, 1.4), vy: rand(-1.5, 0.5), g: 0.05,
+        size: rand(1.5, 3), color: birdColor, decay: 0.018, shape: 'dot'
+      }));
+    }
+  }
+
+  function burstConfetti(x, y) {
+    if (reduceMotion) return;
+    const n = 64;
+    for (let i = 0; i < n; i++) {
+      const a = (Math.PI * 2 * i) / n + rand(-0.2, 0.2);
+      const sp = rand(2, 8);
+      parts.push(new Particle(x, y, {
+        vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 2, g: 0.14,
+        size: rand(4, 8), color: confettiPalette[(Math.random() * confettiPalette.length) | 0],
+        decay: rand(0.01, 0.02), shape: 'rect'
+      }));
+    }
+  }
+
+  // seed birds + steady spawning
+  for (let i = 0; i < TARGET_BIRDS; i++) {
+    const b = new Bird(Math.random() < 0.5 ? 'L' : 'R');
+    b.x = rand(0, W);
+    birds.push(b);
+  }
+  let spawnAcc = 0;
+
+  /* ---------------------------------------------------------
+     Fire control
+     --------------------------------------------------------- */
+  const IGNORE = 'a, button, input, textarea, select, label, summary, [role="button"], [data-fire="off"], .nav-menu, .game-hud, .idiom-note, .btn';
+  function fireAt(x, y, vxHint) {
+    stones.push(new Stone(x, y, clamp(vxHint, -4.5, 4.5)));
+    recoil();
+  }
+  document.addEventListener('pointerdown', (e) => {
+    if (e.target.closest && e.target.closest(IGNORE)) return;
+    if (e.button !== undefined && e.button !== 0) return;
+    const vx = e.pointerType === 'touch' ? 0 : clamp(pointerVX * 0.45, -4.5, 4.5);
+    fireAt(e.clientX, e.clientY, vx);
+  });
+
+  /* ---------------------------------------------------------
+     Main loop
+     --------------------------------------------------------- */
+  let raf = null, prev = performance.now();
+  function loop(now) {
+    const dt = Math.min(2, (now - prev) / 16.67); prev = now;
+    ctx.clearRect(0, 0, W, H);
+
+    // spawn to keep the flock alive
+    spawnAcc += dt;
+    if (spawnAcc > 36 && birds.filter(b => !b.dead).length < TARGET_BIRDS) {
+      birds.push(new Bird()); spawnAcc = 0;
     }
 
-    // Parallax grid (only while hero is in view)
-    if (heroSection && gridLines && scrollY < heroSection.offsetHeight) {
-        const rate = scrollY * 0.3;
-        gridLines.style.transform = `translate(${rate % 60}px, ${rate % 60}px)`;
+    for (let i = birds.length - 1; i >= 0; i--) {
+      const b = birds[i]; b.update(); b.draw();
+      if (b.gone()) birds.splice(i, 1);
     }
-
-    scrollTicking = false;
-}
-
-window.addEventListener('scroll', () => {
-    if (!scrollTicking) {
-        requestAnimationFrame(onScroll);
-        scrollTicking = true;
+    for (let i = stones.length - 1; i >= 0; i--) {
+      const s = stones[i]; s.step(); s.draw();
+      if (s.dead) stones.splice(i, 1);
     }
-}, { passive: true });
+    for (let i = parts.length - 1; i >= 0; i--) {
+      const p = parts[i]; p.update(); p.draw();
+      if (p.life <= 0 || p.y > H + 40) parts.splice(i, 1);
+    }
+    ctx.globalAlpha = 1;
+    raf = requestAnimationFrame(loop);
+  }
+  raf = requestAnimationFrame(loop);
 
-// ===== Intersection Observer for Scroll Animations =====
-const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1
-};
+  // pause when tab hidden (saves cycles)
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) { cancelAnimationFrame(raf); raf = null; }
+    else if (!raf) { prev = performance.now(); raf = requestAnimationFrame(loop); }
+  });
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('animate');
-        }
-    });
-}, observerOptions);
-
-// ===== Stats Counter via IntersectionObserver =====
-let statsAnimated = false;
-
-function animateStats() {
-    if (statsAnimated) return;
-    statsAnimated = true;
-
-    const stats = document.querySelectorAll('.stat-number');
-    stats.forEach(stat => {
-        const text = stat.textContent;
-        const match = text.match(/^([^\d]*)([\d.]+)(.*)$/);
-
-        if (match) {
-            const prefix = match[1];
-            const endValue = parseFloat(match[2]);
-            const suffix = match[3];
-            const duration = 2500;
-            const startTime = performance.now();
-
-            function updateCounter(currentTime) {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                const easeOut = 1 - Math.pow(1 - progress, 3);
-                const currentValue = endValue * easeOut;
-
-                if (endValue % 1 === 0) {
-                    stat.textContent = prefix + Math.floor(currentValue) + suffix;
-                } else {
-                    stat.textContent = prefix + currentValue.toFixed(1) + suffix;
-                }
-
-                if (progress < 1) {
-                    requestAnimationFrame(updateCounter);
-                } else {
-                    stat.textContent = text;
-                }
-            }
-
-            requestAnimationFrame(updateCounter);
-        }
-    });
-}
-
-const statsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            animateStats();
-            statsObserver.disconnect();
-        }
-    });
-}, { threshold: 0.3 });
-
-// ===== DOMContentLoaded: Register all observers =====
-document.addEventListener('DOMContentLoaded', () => {
-    // About section
-    const aboutText = document.querySelector('.about-text');
-    const aboutImage = document.querySelector('.about-image');
-    if (aboutText) observer.observe(aboutText);
-    if (aboutImage) observer.observe(aboutImage);
-
-    // Timeline items
-    document.querySelectorAll('.timeline-item').forEach(item => observer.observe(item));
-
-    // Project cards
-    document.querySelectorAll('.project-card').forEach(card => observer.observe(card));
-
-    // Education cards
-    const educationCard = document.querySelector('.education-card');
-    const certificationsCard = document.querySelector('.certifications-card');
-    if (educationCard) observer.observe(educationCard);
-    if (certificationsCard) observer.observe(certificationsCard);
-
-    // Achievement cards
-    document.querySelectorAll('.achievement-card').forEach(card => observer.observe(card));
-
-    // Stats counter
-    const heroStats = document.querySelector('.hero-stats');
-    if (heroStats) statsObserver.observe(heroStats);
-});
-
-// ===== Project Filtering =====
-const filterBtns = document.querySelectorAll('.filter-btn');
-const projectCardsAll = document.querySelectorAll('.project-card');
-
-filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        const filter = btn.dataset.filter;
-
-        projectCardsAll.forEach(card => {
-            const category = card.dataset.category;
-
-            if (filter === 'all' || category === filter) {
-                card.classList.remove('hidden');
-                card.classList.remove('animate');
-                setTimeout(() => card.classList.add('animate'), 10);
-            } else {
-                card.classList.add('hidden');
-            }
-        });
-    });
-});
-
-// ===== Smooth Scroll for Anchor Links =====
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
-
-// ===== Skill Tag Hover Effect (CSS-only via transform in stylesheet is better, but keeping JS for consistency) =====
-document.querySelectorAll('.skill-tag').forEach(tag => {
-    tag.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-2px)';
-    });
-    tag.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0)';
-    });
-});
-
-// ===== Card Tilt Effect (Desktop only, with will-change hint) =====
-if (window.matchMedia('(pointer: fine)').matches && window.innerWidth > 768) {
-    const cards = document.querySelectorAll('.project-card, .achievement-card');
-
-    cards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            card.style.willChange = 'transform';
-        });
-
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            const rotateX = (y - rect.height / 2) / 20;
-            const rotateY = (rect.width / 2 - x) / 20;
-
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
-        });
-
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
-            card.style.willChange = 'auto';
-        });
-    });
-}
-
-// ===== Console Easter Egg =====
-console.log('%c Welcome to my portfolio! ', 'background: #00d9ff; color: #0a0a0f; font-size: 16px; padding: 10px; border-radius: 5px;');
-console.log('%c Built with HTML, CSS, and JavaScript ', 'color: #8b5cf6; font-size: 12px;');
-console.log('%c Feel free to connect: godaradaksh2001@gmail.com ', 'color: #a1a1aa; font-size: 12px;');
+  updateScore();
+})();

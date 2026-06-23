@@ -1,0 +1,5 @@
+# Local preview helpers (Claude Code)
+.claude/
+
+# OS / editor cruft
+.DS_Store
