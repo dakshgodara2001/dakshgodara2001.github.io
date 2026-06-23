@@ -160,13 +160,13 @@ body.slingshot-ready .slingshot { opacity: 1; }
 .game-hud {
     position: fixed; right: clamp(1rem, 3vw, 2rem); left: auto; bottom: clamp(1rem, 3vw, 2rem);
     z-index: 90; width: min(280px, 78vw);
-    background: color-mix(in srgb, var(--bg2) 20%, transparent);
-    -webkit-backdrop-filter: blur(22px) saturate(180%);
-    backdrop-filter: blur(22px) saturate(180%);
-    border: 1px solid color-mix(in srgb, var(--text1) 14%, transparent);
+    background: color-mix(in srgb, var(--bg2) 10%, transparent);
+    -webkit-backdrop-filter: blur(16px) saturate(190%) brightness(1.05);
+    backdrop-filter: blur(16px) saturate(190%) brightness(1.05);
+    border: 1px solid color-mix(in srgb, var(--text1) 8%, transparent);
     border-radius: 18px;
     padding: 1.1rem 1.2rem 1.15rem;
-    box-shadow: 0 14px 44px -20px rgba(0,0,0,.45), inset 0 1px 0 0 color-mix(in srgb, #fff 32%, transparent);
+    box-shadow: 0 12px 40px -16px rgba(0,0,0,.4), inset 0 1px 0 0 color-mix(in srgb, #fff 50%, transparent);
     transition: transform .4s var(--ease), opacity .4s;
 }
 .game-hud.hidden { transform: translateY(20px) scale(.96); opacity: 0; pointer-events: none; }
@@ -194,13 +194,13 @@ body.slingshot-ready .slingshot { opacity: 1; }
 .idiom-note {
     position: fixed; left: clamp(1rem, 3vw, 2rem); right: auto; bottom: clamp(1rem, 3vw, 2rem);
     z-index: 90; width: min(224px, 72vw);
-    background: color-mix(in srgb, var(--bg2) 20%, transparent);
-    -webkit-backdrop-filter: blur(22px) saturate(180%);
-    backdrop-filter: blur(22px) saturate(180%);
-    border: 1px solid color-mix(in srgb, var(--text1) 14%, transparent);
+    background: color-mix(in srgb, var(--bg2) 10%, transparent);
+    -webkit-backdrop-filter: blur(16px) saturate(190%) brightness(1.05);
+    backdrop-filter: blur(16px) saturate(190%) brightness(1.05);
+    border: 1px solid color-mix(in srgb, var(--text1) 8%, transparent);
     border-radius: 16px;
     padding: .9rem 1rem;
-    box-shadow: 0 14px 44px -20px rgba(0,0,0,.45), inset 0 1px 0 0 color-mix(in srgb, #fff 32%, transparent);
+    box-shadow: 0 12px 40px -16px rgba(0,0,0,.4), inset 0 1px 0 0 color-mix(in srgb, #fff 50%, transparent);
     opacity: 0; transform: translateY(16px) scale(.96); pointer-events: none;
     transition: opacity .5s var(--ease), transform .5s var(--ease);
 }

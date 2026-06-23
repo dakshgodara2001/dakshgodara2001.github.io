@@ -108,7 +108,7 @@
   }
   song && song.addEventListener('ended', () => idiomNote && idiomNote.classList.remove('show'));
 
-  let birdsDown = 0, doubles = 0;
+  let birdsDown = 0, doubles = 0, speedMult = 1;
   function updateScore() {
     if (scoreBirds)  scoreBirds.textContent  = birdsDown;
     if (scoreDouble) scoreDouble.textContent = doubles;
@@ -128,6 +128,7 @@
   let congratsTimer = null;
   function celebrate(x, y) {
     doubles++;
+    if (doubles % 2 === 0) speedMult = Math.min(speedMult + 0.1, 2.6);  // birds speed up a touch every 2 doubles
     playSong();
     showComic();
     burstConfetti(x, y);
@@ -206,7 +207,7 @@
       this.x = side === 'L' ? -50 : W + 50;
       this.baseY = rand(54, H * 0.6);
       this.y = this.baseY;
-      this.speed = rand(0.5, 1.4) * (reduceMotion ? 0.6 : 1);
+      this.baseSpeed = rand(0.5, 1.4) * (reduceMotion ? 0.6 : 1);
       this.size = rand(12, 22);
       this.flap = rand(0, Math.PI * 2);
       this.flapSpd = rand(0.12, 0.22);
@@ -220,7 +221,7 @@
         this.x += this.dir * 0.4; this.rot += 0.22; this.alpha -= 0.012;
         return;
       }
-      this.x += this.dir * this.speed;
+      this.x += this.dir * this.baseSpeed * speedMult;
       this.flap += this.flapSpd;
       this.bobPhase += 0.02;
       this.y = this.baseY + Math.sin(this.bobPhase) * this.bobAmp;
