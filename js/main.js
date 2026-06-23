@@ -355,25 +355,46 @@
     stones.push(new Stone(x, y, clamp(vxHint, -4.5, 4.5)));
     recoil();
   }
-  // mouse / pen fire on press; touch fires only on a clean tap, so scrolling never fires
-  let tap = null;
-  const TAP_MOVE = 12, TAP_TIME = 700;
+  // ---- Fire control ----
+  // Desktop (mouse / pen): fire on press, with a little aim from pointer velocity.
+  // Touch: handled via TOUCH events (reliable during scroll) + a scroll-position
+  // check, so a scroll NEVER fires — only a clean, stationary tap does.
+  const TAP_MOVE = 14, TAP_TIME = 650;
+  let lastTouchAt = 0;
+  const scrollTop = () => window.scrollY || window.pageYOffset || 0;
+
   document.addEventListener('pointerdown', (e) => {
+    if (e.pointerType === 'touch') return;                     // touch handled by touch events below
+    if (performance.now() - lastTouchAt < 700) return;         // swallow synthetic mouse after a touch
     if (e.button !== undefined && e.button !== 0) return;
     if (e.target.closest && e.target.closest(IGNORE)) return;
-    if (e.pointerType === 'touch') { tap = { x: e.clientX, y: e.clientY, t: performance.now() }; return; }
     fireAt(e.clientX, e.clientY, clamp(pointerVX * 0.45, -4.5, 4.5));
   });
-  document.addEventListener('pointermove', (e) => {
-    if (tap && Math.hypot(e.clientX - tap.x, e.clientY - tap.y) > TAP_MOVE) tap = null;   // became a scroll
+
+  let touchTap = null;
+  document.addEventListener('touchstart', (e) => {
+    lastTouchAt = performance.now();
+    if (e.touches.length > 1) { touchTap = null; return; }     // pinch / multi-touch
+    const t = e.changedTouches[0];
+    if (t.target && t.target.closest && t.target.closest(IGNORE)) { touchTap = null; return; }
+    touchTap = { x: t.clientX, y: t.clientY, t: performance.now(), sy: scrollTop() };
   }, { passive: true });
-  document.addEventListener('pointercancel', () => { tap = null; });
-  document.addEventListener('pointerup', (e) => {
-    if (e.pointerType !== 'touch' || !tap) return;
-    const start = tap; tap = null;
-    if (performance.now() - start.t > TAP_TIME) return;                  // long press, not a tap
-    if (e.target.closest && e.target.closest(IGNORE)) return;
-    fireAt(e.clientX, e.clientY, 0);
+  document.addEventListener('touchmove', (e) => {
+    if (!touchTap) return;
+    const t = e.changedTouches[0];
+    if (Math.hypot(t.clientX - touchTap.x, t.clientY - touchTap.y) > TAP_MOVE) touchTap = null;
+  }, { passive: true });
+  document.addEventListener('touchcancel', () => { touchTap = null; });
+  document.addEventListener('touchend', (e) => {
+    lastTouchAt = performance.now();
+    if (!touchTap) return;
+    const start = touchTap; touchTap = null;
+    const t = e.changedTouches[0] || {};
+    if (performance.now() - start.t > TAP_TIME) return;                                 // long press
+    if (Math.hypot((t.clientX || start.x) - start.x, (t.clientY || start.y) - start.y) > TAP_MOVE) return; // moved = swipe
+    if (Math.abs(scrollTop() - start.sy) > 4) return;                                   // page scrolled = not a tap
+    if (t.target && t.target.closest && t.target.closest(IGNORE)) return;
+    fireAt(t.clientX || start.x, t.clientY || start.y, 0);
   });
 
   /* ---------------------------------------------------------
