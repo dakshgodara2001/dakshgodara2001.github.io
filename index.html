@@ -3,392 +3,364 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Daksh Godara - Product Manager at INDmoney. Building 0→1 fintech, insurance & AI products that move business metrics.">
-    <meta name="keywords" content="Product Manager, INDmoney, Fintech, AI, Portfolio, Daksh Godara">
+    <title>Daksh Godara</title>
+    <meta name="description" content="Daksh Godara, founder of nimaraa labs. Previously product at INDmoney.">
     <meta name="author" content="Daksh Godara">
-
-    <!-- Open Graph -->
+    <link rel="canonical" href="https://dakshgodara2001.github.io/">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://dakshgodara2001.github.io/">
-    <meta property="og:title" content="Daksh Godara | Product Manager @ INDmoney">
-    <meta property="og:description" content="Building 0→1 products across Insurance, Wealth & AI at scale. 4M+ users impacted.">
-    <meta property="og:image" content="https://dakshgodara2001.github.io/assets/og-image.png">
     <meta property="og:site_name" content="Daksh Godara">
-
-    <!-- Twitter Card -->
+    <meta property="og:title" content="Daksh Godara">
+    <meta property="og:description" content="Founder, nimaraa labs.">
+    <meta property="og:image" content="https://dakshgodara2001.github.io/assets/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Daksh Godara | Product Manager @ INDmoney">
-    <meta name="twitter:description" content="Building 0→1 products across Insurance, Wealth & AI at scale. 4M+ users impacted.">
-    <meta name="twitter:image" content="https://dakshgodara2001.github.io/assets/og-image.png">
-
-    <title>Daksh Godara | Product Manager</title>
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='14' fill='%2316181d'/><text x='50' y='64' font-family='monospace' font-size='34' font-weight='bold' fill='%23e2674a' text-anchor='middle'>DYG</text></svg>">
-
-    <!-- Fonts -->
+    <meta name="twitter:title" content="Daksh Godara">
+    <meta name="twitter:description" content="Founder, nimaraa labs.">
+    <meta name="twitter:image" content="https://dakshgodara2001.github.io/assets/og-image.jpg">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%23f2eee5'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='22' letter-spacing='1' fill='%231c2430' text-anchor='middle'%3EDYG%3C/text%3E%3C/svg%3E">
+    <meta name="theme-color" content="#f2eee5">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600&family=Noto+Serif:ital@1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --paper: #f2eee5;
+            --card:  #fbf9f4;
+            --ink:   #1c2430;
+            --muted: #6f6a60;
+            --faint: #a39d91;
+            --pink:  #e0218a;          /* Barbie pink: the one colour, kept to the turn mark */
+            --select: #73a89a;         /* selection, after instinct.co: a muted sage block, ivory type */
+            --select-ink: #fdfcfb;
+        }
+        ::selection      { background: var(--select); color: var(--select-ink); text-shadow: none; }
+        ::-moz-selection { background: var(--select); color: var(--select-ink); text-shadow: none; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { -webkit-text-size-adjust: 100%; height: 100%; overflow: hidden; overscroll-behavior: none; }
+        body {                       /* one screen, pinned: nothing to scroll, no rubber-band */
+            position: fixed; inset: 0; overflow: hidden; overscroll-behavior: none;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.8rem;
+            padding: 2rem 1rem;
+            background: var(--paper); color: var(--ink);
+            font-family: "Inter", system-ui, sans-serif; font-size: 12.5px; line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { color: inherit; text-decoration: none; }
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="css/style.css?v=4">
+        /* one picture behind the card: Bateman reading it, the boardroom blinds and panelling around
+           him. The script places it from the card's position on every screen (his eyes just above
+           the card, his gaze falling on it); these values are the desktop fallback without script. */
+        .portrait {
+            position: fixed; z-index: 0; pointer-events: none; user-select: none;
+            height: 112vh; aspect-ratio: 5421 / 1820;
+            /* eyes (47% across, 33% down the picture) just above the card and a little left of it,
+               so his downward gaze falls on the card */
+            top: -10.5vh; left: calc(48vw - 156.83vh);
+            opacity: 0; animation: surface 3s .8s ease forwards;
+            isolation: isolate;
+        }
+        /* tall phones: the face is sized to the width so both eyes show, and the engraving
+           fades into the paper above his hair and below his chin, like an engraved vignette */
+        .portrait.vignette {
+            -webkit-mask-image: linear-gradient(to bottom, transparent, #000 13%, #000 76%, transparent);
+                    mask-image: linear-gradient(to bottom, transparent, #000 13%, #000 76%, transparent);
+        }
+        @keyframes surface { to { opacity: .34; } }
+        /* his look hardens when the card is turned: the brows and eyes are redrawn in five even
+           steps (the brows lead, the lids tighten after, the frown lines settle last) and each
+           step is cross-faded into the next additively, so the engraved lines keep their exact
+           weight at every moment */
+        .portrait img { position: absolute; display: block; mix-blend-mode: plus-lighter; }
+        .portrait .room { inset: 0; width: 100%; height: 100%;
+            clip-path: polygon(evenodd, 0 0, 100% 0, 100% 100%, 0 100%, 0 0,
+                28.1129% 0, 64.8589% 0, 64.8589% 54.5055%, 28.1129% 54.5055%, 28.1129% 0); }
+        .portrait .still { inset: 0; width: 100%; height: 100%; clip-path: inset(0 35.1411% 45.4945% 28.1129%); will-change: opacity; }
+        .portrait .stare { left: 28.1129%; top: 0; width: 36.7460%; height: 54.5055%; opacity: 0; will-change: opacity; }
+        .stage, .turn { position: relative; z-index: 1; }
+
+        .stage {
+            /* a landscape card on every screen; never taller than ~42% of the screen, so his eyes
+               always have room above it */
+            width: min(540px, 88vw, 73.5svh); aspect-ratio: 1.75;
+            container-type: inline-size;              /* type below is sized to the card itself */
+            perspective: 1600px; cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            animation: appear 1s ease both;
+        }
+        @keyframes appear { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+        .card {
+            position: relative; width: 100%; height: 100%;
+            transform-style: preserve-3d;
+            transition: transform .9s cubic-bezier(.6, .04, .22, 1);
+        }
+
+        .face {
+            position: absolute; inset: 0;
+            backface-visibility: hidden; -webkit-backface-visibility: hidden;
+            background: var(--card); border-radius: 2px;
+            box-shadow: 0 0 0 .5px rgba(28, 36, 48, .06), 0 1px 2px rgba(28, 36, 48, .06), 0 18px 40px -22px rgba(28, 36, 48, .3);
+        }
+
+        /* small tracked capitals, used for every label */
+        .label { font-size: max(7px, 1.76cqw); font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--faint); }
+
+        /* ---------- front: two top corners, a centre, a line at the foot ---------- */
+        .front {
+            display: flex; flex-direction: column; justify-content: space-between;
+            padding: 8% 8.5%;
+        }
+        .top { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: flex-start; }
+        .social { display: flex; gap: max(9px, 2.6cqw); padding-top: .74cqw; }
+        .social a { color: var(--faint); display: block; transition: color .2s; }
+        .social a:hover, .social a:focus-visible { color: var(--ink); outline: none; }
+        .social svg { display: block; width: max(11px, 2.6cqw); height: max(11px, 2.6cqw); }
+
+        .firm { text-align: right; }
+        .firm .brand {
+            font-family: "Cormorant Garamond", serif; font-weight: 500;
+            font-size: max(13px, 3.85cqw); line-height: 1; letter-spacing: .01em;
+        }
+
+        .who {                       /* sits in the true centre of the card, under the corners */
+            position: absolute; inset: 0; pointer-events: none;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center;
+        }
+        .name {
+            font-family: "Cormorant Garamond", Garamond, serif; font-weight: 500;
+            font-size: max(13px, 4.89cqw); letter-spacing: .3em; text-transform: uppercase;
+            line-height: 1.2; margin-right: -.3em;    /* balance the trailing tracking so it centres */
+        }
+        .title {
+            font-family: "Cormorant Garamond", serif; font-style: italic;
+            font-size: max(12px, 3.5cqw); color: var(--muted); margin-top: .3em;
+        }
+
+        .coords { position: relative; text-align: center; letter-spacing: .26em; opacity: .8; font-variant-numeric: tabular-nums; }
+
+        /* ---------- back: one centred column ---------- */
+        .back {
+            transform: rotateY(180deg); cursor: default;
+            display: flex; flex-direction: column; justify-content: center; gap: 4.2cqw;
+            text-align: center; padding: 6% 8%;
+        }
+        .back .label { margin-bottom: 1.1cqw; }
+        .back p {                    /* same serif as the front; labels stay in the small capitals */
+            font-family: "Cormorant Garamond", Garamond, serif; font-weight: 500;
+            font-size: max(11.5px, 3.38cqw); line-height: 1.35; letter-spacing: .01em;
+        }
+        .back .yr { color: var(--muted); font-style: italic; font-weight: 400; margin-left: .5em; }
+        .back p a { border-bottom: 1px solid rgba(28, 36, 48, .16); transition: border-color .2s; }
+        .back p a:hover, .back p a:focus-visible { border-color: var(--ink); outline: none; }
+
+        .turn {
+            display: grid; place-items: center; width: 40px; height: 40px;
+            color: var(--pink); background: none; border: none; border-radius: 50%; cursor: pointer;
+            transition: color .2s;
+            animation: appear 1s .4s ease both;
+        }
+        .turn:hover, .turn:focus-visible { color: #b8176f; outline: none; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .stage, .turn { animation: none; }
+            .portrait { animation: none; opacity: .34; }
+            .card { transition: none; }
+        }
+
+        /* ---------- back, the dateline: the years as a large light numeral, the rest as one line of prose ---------- */
+        .back { justify-content: center; gap: 5cqw; text-align: left; padding: 7% 8.5%; }
+        .back .lead { display: flex; align-items: center; gap: 4.5cqw; }
+        .back .years {
+            font-family: "Cormorant Garamond", serif; font-style: italic; font-weight: 400;
+            font-size: max(40px, 13.5cqw); line-height: .8; letter-spacing: -.02em; color: var(--ink);
+            padding-right: 4.5cqw; border-right: 1px solid rgba(28, 36, 48, .14);
+        }
+        .back .years span { color: var(--faint); margin: 0 .04em; }
+        .back .lead .label { margin-bottom: .9cqw; }
+        .back .role { font-size: max(14px, 4.3cqw); line-height: 1.2; }
+        .back .prose { font-style: italic; font-weight: 400; color: var(--muted);
+            font-size: max(11.5px, 3.05cqw); line-height: 1.5; max-width: 40em; }
+        .back .nowrap { white-space: nowrap; }
+    </style>
 </head>
 <body>
-    <!-- Skip to content -->
-    <a href="#about" class="skip-to-content">Skip to content</a>
-
-    <!-- Slingshot cursor -->
-    <div class="slingshot" id="slingshot" aria-hidden="true">
-        <svg width="46" height="52" viewBox="0 0 46 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- band -->
-            <path class="sling-band" id="sling-band" d="M11 16 L23 25 L35 16" stroke="var(--warm)" stroke-width="1.6" stroke-linecap="round" fill="none"/>
-            <!-- pouch -->
-            <circle class="sling-pouch" cx="23" cy="25" r="2.4" fill="var(--warm)"/>
-            <!-- fork -->
-            <path class="sling-fork" d="M11 16 V9 M35 16 V9 M11 16 C13 26 21 30 23 38 M35 16 C33 26 25 30 23 38" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/>
-            <!-- handle -->
-            <path class="sling-fork" d="M23 38 V49" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-        </svg>
+    <div class="portrait" id="portrait" aria-hidden="true">
+        <img class="room" src="assets/scene.webp" alt="">
+        <img class="still" src="assets/scene.webp" alt="">
+        <img class="stare" data-src="assets/stare-1.webp" alt="">
+        <img class="stare" data-src="assets/stare-2.webp" alt="">
+        <img class="stare" data-src="assets/stare-3.webp" alt="">
+        <img class="stare" data-src="assets/stare-4.webp" alt="">
+        <img class="stare" data-src="assets/stare-5.webp" alt="">
     </div>
 
-    <!-- Sky canvas: birds, stones, confetti -->
-    <canvas id="sky" aria-hidden="true"></canvas>
-
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
-        <div class="nav-container">
-            <a href="#home" class="nav-logo" data-fire="off">
-                <span class="logo-bracket">&lt;</span>DYG<span class="logo-bracket">/&gt;</span>
-            </a>
-            <div class="nav-menu" id="nav-menu">
-                <a href="#about" class="nav-link">About</a>
-                <a href="#experience" class="nav-link">Experience</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#education" class="nav-link">Education</a>
-                <a href="#connect" class="nav-link">Connect</a>
-            </div>
-            <div class="nav-actions">
-                <button class="theme-toggle" id="theme-toggle" data-fire="off" aria-label="Toggle light / dark theme" title="Toggle theme">
-                    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="4"/>
-                        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
-                    </svg>
-                    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
-                    </svg>
-                </button>
-                <button class="nav-toggle" id="nav-toggle" data-fire="off" aria-label="Toggle menu">
-                    <span class="hamburger"></span>
-                </button>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Game HUD / message box -->
-    <aside class="game-hud" id="game-hud" aria-live="polite">
-        <button class="game-hud-close" id="game-hud-close" data-fire="off" aria-label="Hide game panel">&times;</button>
-        <p class="game-hud-eyebrow">// easter egg</p>
-        <p class="game-hud-title">Two birds, one stone</p>
-        <p class="game-hud-sub">Your cursor's a <strong>slingshot</strong>. Click the sky and try to down two birds with one stone.</p>
-        <p class="game-hud-score">
-            <span>Birds&nbsp;down <b id="score-birds">0</b></span>
-            <span>Doubles <b id="score-doubles">0</b></span>
-        </p>
-    </aside>
-
-    <!-- More on the idiom -->
-    <aside class="idiom-note" id="idiom-note" aria-label="More on two birds, one stone">
-        <p class="idiom-eyebrow">🎬 more on</p>
-        <p class="idiom-title">“Two birds, one&nbsp;stone”</p>
-        <a class="idiom-link" href="https://www.youtube.com/watch?v=71gilEP4aJY" target="_blank" rel="noopener">Watch the comic ↗</a>
-    </aside>
-
-    <!-- Congrats toast -->
-    <div class="congrats" id="congrats" role="status" aria-live="assertive">
-        <span class="congrats-emoji">🎯</span>
-        <span class="congrats-text">Two birds, one stone!</span>
-    </div>
-
-    <!-- Hero Section -->
-    <header class="hero" id="home">
-        <div class="hero-content">
-            <p class="hero-greeting">Hi, I'm</p>
-            <h1 class="hero-name">Daksh <span class="serif">Godara</span></h1>
-            <p class="hero-role">Product Manager <span class="at">@</span> <a href="https://www.indmoney.com" target="_blank" rel="noopener" class="role-link">INDmoney</a></p>
-            <p class="hero-tagline">I build <span class="serif">0→1</span> fintech and AI products.</p>
-            <div class="hero-cta">
-                <a href="#projects" class="btn btn-primary">View my work</a>
-                <a href="assets/res_tdyg.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Resume ↗</a>
-            </div>
-            <div class="hero-stats">
-                <div class="stat"><span class="stat-number">4M+</span><span class="stat-label">Users impacted</span></div>
-                <div class="stat"><span class="stat-number">$1.44M+</span><span class="stat-label">ARR influenced</span></div>
-                <div class="stat"><span class="stat-number">6</span><span class="stat-label">0→1 products</span></div>
-                <div class="stat"><span class="stat-number">2.5×</span><span class="stat-label">ARPU lift</span></div>
-            </div>
-        </div>
-        <a href="#about" class="scroll-cue" data-fire="off" aria-label="Scroll to about">
-            <span>scroll</span>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
-        </a>
-    </header>
-
-    <main>
-    <!-- About -->
-    <section class="section about" id="about">
-        <div class="container">
-            <p class="section-eyebrow"><span class="section-num">01</span> / about</p>
-            <div class="about-grid">
-                <div class="about-text reveal">
-                    <p class="about-lead">I'm a <em class="serif">product manager with a technical background</em>.</p>
-                    <div class="skills">
-                        <div class="skill-group">
-                            <h4>Product &amp; Strategy</h4>
-                            <div class="tags">
-                                <span>Product Management &amp; Strategy</span><span>Roadmapping &amp; Prioritization</span><span>GTM</span><span>A/B Testing &amp; Experimentation</span><span>System Design</span><span>APIs &amp; Integrations</span>
-                            </div>
-                        </div>
-                        <div class="skill-group">
-                            <h4>AI, LLM &amp; Agents</h4>
-                            <div class="tags">
-                                <span>RAG</span><span>LLM &amp; Agentic Workflows</span><span>Multi-agent Systems</span><span>MCP</span><span>Context &amp; Prompt Engineering</span><span>Evals &amp; LLM Observability</span><span>Fine-tuning &amp; Post-training</span><span>LLM Serving &amp; Inference</span><span>GPU Benchmarking</span>
-                            </div>
-                        </div>
-                        <div class="skill-group">
-                            <h4>Languages &amp; Tools</h4>
-                            <div class="tags subtle">
-                                <span>Python</span><span>SQL</span><span>C++</span><span>LangGraph</span><span>Git</span><span>Figma</span><span>Jira</span><span>Mixpanel</span><span>Grafana</span><span>Codex</span><span>Claude Code</span><span>vLLM</span><span>LangSmith</span><span>Vector DBs (pgvector, Pinecone)</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>            </div>
-        </div>
-    </section>
-
-    <!-- Experience -->
-    <section class="section experience" id="experience">
-        <div class="container">
-            <p class="section-eyebrow"><span class="section-num">02</span> / experience</p>
-
-            <div class="xp-item reveal">
-                <div class="xp-meta">
-                    <span class="xp-date">Jun 2025 - Present</span>
-                    <span class="xp-kind">Full-time</span>
-                </div>
-                <div class="xp-body">
-                    <h3>Product Manager <a href="https://www.indmoney.com" target="_blank" rel="noopener" class="co">@ INDmoney</a></h3>
-                    <p class="xp-summary">Leading 0→1 fintech and AI products end to end: discovery, roadmap, GTM, CRM workflows and execution with engineering, design, sales and ops.</p>
-                    <div class="xp-highlights">
-                        <div class="hl">
-                            <h4>Term Life Insurance</h4>
-                            <p>Owned the term life funnel end to end: insurer integrations (ICICI Pru, Bajaj, Tata AIA, Axis Max), recommendation journeys, riders, CRM and sales tooling.</p>
-                            <ul class="metrics">
-                                <li><b>3rd largest</b> digital aggregator by revenue in India</li>
-                                <li>Among India's highest <b>term‑life funnel conversion</b></li>
-                            </ul>
-                        </div>
-                        <div class="hl">
-                            <h4>AI Insurance Agent</h4>
-                            <p>Built an end-to-end agentic insurance assistant for cover recommendations, real-time quote fetching, plan comparison, proposal filling and payment handoff.</p>
-                            <ul class="metrics">
-                                <li>Improved <b>DIY funnel completion</b></li>
-                                <li><b>−20%</b> support queries</li>
-                            </ul>
-                        </div>
+    <main class="stage" id="stage">
+        <div class="card" id="card">
+            <section class="face front" id="front">
+                <div class="top">
+                    <nav class="social" aria-label="Elsewhere">
+                        <a href="https://linkedin.com/in/daksh-godara-2001" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125zM7.119 20.452H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        </a>
+                        <a href="https://x.com/daksh1x3" target="_blank" rel="noopener" aria-label="X" title="X">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+                        </a>
+                        <a href="https://github.com/dakshgodara2001" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                        </a>
+                    </nav>
+                    <div class="firm">
+                        <a class="brand" href="https://nimaraa.ai" target="_blank" rel="noopener">nimaraa labs</a>
                     </div>
                 </div>
-            </div>
-
-            <div class="xp-item reveal">
-                <div class="xp-meta">
-                    <span class="xp-date">Sep 2023 - May 2025</span>
-                    <span class="xp-kind">Full-time</span>
+                <div class="who">
+                    <h1 class="name">Daksh Godara</h1>
+                    <p class="title">Founder</p>
                 </div>
-                <div class="xp-body">
-                    <h3>Associate Product Manager <a href="https://www.indmoney.com" target="_blank" rel="noopener" class="co">@ INDmoney</a></h3>
-                    <div class="xp-highlights">
-                        <div class="hl">
-                            <h4>INDwheels: Vehicle Garage + Motor Insurance</h4>
-                            <p>Built a vehicle garage to track value, insurance, PUCC, FASTag and challans, then layered motor‑insurance aggregation (Tata, ICICI, GoDigit, Kotak) on top.</p>
-                            <ul class="metrics">
-                                <li><b>1M+</b> active vehicles tracked</li>
-                                <li>Industry‑leading <b>motor insurance conversion</b></li>
-                                <li>Built repeat‑engagement utility before <b>monetization</b></li>
-                            </ul>
-                        </div>
+                <p class="coords label" title="New Delhi">28.61° N &nbsp;77.21° E</p>
+            </section>
+
+            <section class="face back" id="back" aria-hidden="true" inert>
+                <div class="lead">
+                    <p class="years" aria-label="2023 to 2026">23<span>–</span>26</p>
+                    <div>
+                        <h2 class="label">Previously</h2>
+                        <p class="role">Product Manager,<br><a href="https://www.indmoney.com" target="_blank" rel="noopener">INDmoney</a></p>
                     </div>
                 </div>
-            </div>
-
-            <div class="xp-item reveal">
-                <div class="xp-meta">
-                    <span class="xp-date">Aug 2020 - Dec 2022</span>
-                    <span class="xp-kind">Startup</span>
-                </div>
-                <div class="xp-body">
-                    <h3>Co-Founder <span class="co">@ 8Bins</span></h3>
-                    <p class="xp-summary">Co‑founded an IoT + computer‑vision startup for smart waste segregation, with a hardware and software prototype for OpenCV waste classification.</p>
-                    <ul class="metrics">
-                        <li>Top 12 at <b>NASSCOM CienaHack 2020</b></li>
-                        <li>Mentored by <a href="https://www.padup.in/" target="_blank" rel="noopener">PadUp Ventures</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="xp-item reveal">
-                <div class="xp-meta">
-                    <span class="xp-date">2020 - 2023</span>
-                    <span class="xp-kind">Internships</span>
-                </div>
-                <div class="xp-body">
-                    <h3>Earlier: Product &amp; Research Internships</h3>
-                    <ul class="intern-list">
-                        <li><b>Product Intern, INDmoney</b>: built <em>Priority Circle</em>, a UHNI member experience with private‑banker assignment and financial planning journeys. <span class="pill">2.5× ARPU vs regular users</span></li>
-                        <li><b>Product Quality Intern, Monster.com (foundit)</b>: QA workflows with SQL and Grafana monitoring.</li>
-                        <li><b>Summer Intern, Physics Wallah</b>: product quality and UX validation at India's leading edtech unicorn.</li>
-                    </ul>
-                </div>
-            </div>
+                <p class="prose">Before that, Electrical Engineering at NSIT Delhi, <span class="nowrap">class of 2023.</span></p>
+            </section>
         </div>
-    </section>
-
-    <!-- Projects -->
-    <section class="section projects" id="projects">
-        <div class="container">
-            <p class="section-eyebrow"><span class="section-num">03</span> / projects</p>
-            <div class="proj-grid">
-                <article class="proj-card reveal">
-                    <header class="proj-head">
-                        <span class="proj-tick">◆</span>
-                        <a href="https://github.com/dakshgodara2001/gpu-inference" target="_blank" rel="noopener" class="proj-gh" aria-label="GitHub">GitHub ↗</a>
-                    </header>
-                    <h3>GPU Inference Economics</h3>
-                    <p>Rented a single H100, served Qwen2.5-7B on vLLM, and benchmarked it as a vendor (synthetic load) and a customer (a real research agent). Cost per million tokens swung 45×, from $5.89 to $0.13, set almost entirely by how full the card was kept.</p>
-                    <div class="proj-tags"><span>vLLM</span><span>H100</span><span>LLM Serving</span><span>Benchmarks</span></div>
-                </article>
-
-                <article class="proj-card reveal">
-                    <header class="proj-head">
-                        <span class="proj-tick">◆</span>
-                        <span class="proj-role">Founder / Builder</span>
-                    </header>
-                    <h3>Arbiter: Agentic Trading Decisions</h3>
-                    <p>An agentic copilot for Indian retail traders that turns every trade idea into a structured decision card: thesis, risk, invalidation, market context and post‑trade feedback.</p>
-                    <div class="proj-tags"><span>Agentic AI</span><span>Trading</span><span>Risk Systems</span></div>
-                </article>
-
-                <article class="proj-card reveal">
-                    <header class="proj-head">
-                        <span class="proj-tick">◆</span>
-                        <a href="https://github.com/dakshgodara2001/sunSeat" target="_blank" rel="noopener" class="proj-gh" aria-label="GitHub">GitHub ↗</a>
-                    </header>
-                    <h3>SunSeat: Sunniest‑Seat Engine</h3>
-                    <p>A seat‑recommendation engine using route geometry, departure time and real solar‑position math to pick the least‑sunny seat for a car ride.</p>
-                    <div class="proj-tags"><span>Python</span><span>FastAPI</span><span>Recommendation</span></div>
-                </article>
-
-                <article class="proj-card reveal">
-                    <header class="proj-head">
-                        <span class="proj-tick">◆</span>
-                        <a href="https://github.com/dakshgodara2001/Stock-Monitoring-Platform" target="_blank" rel="noopener" class="proj-gh" aria-label="GitHub">GitHub ↗</a>
-                    </header>
-                    <h3>NSE/BSE Market Intelligence</h3>
-                    <p>An automated Indian‑market scanner over Nifty 50, Bank Nifty and constituents, fusing technical signals, sector context, fundamentals and pre‑market cues into watchlists.</p>
-                    <div class="proj-tags"><span>Python</span><span>Market Data</span><span>Automation</span></div>
-                </article>
-
-                <article class="proj-card reveal">
-                    <header class="proj-head">
-                        <span class="proj-tick">◆</span>
-                        <span class="proj-role">Startup</span>
-                    </header>
-                    <h3>8Bins: Smart Waste Management</h3>
-                    <p>Co‑founded an IoT + computer‑vision startup for automated waste segregation, pairing hardware prototyping with OpenCV classification workflows.</p>
-                    <div class="proj-tags"><span>IoT</span><span>Computer Vision</span><span>OpenCV</span></div>
-                </article>
-
-                <article class="proj-card reveal">
-                    <header class="proj-head">
-                        <span class="proj-tick">◆</span>
-                        <a href="https://github.com/dakshgodara2001/ai-models-vs-commits" target="_blank" rel="noopener" class="proj-gh" aria-label="GitHub">GitHub ↗</a>
-                    </header>
-                    <h3>AI Models vs Developer Activity</h3>
-                    <p>A time‑series study of whether major LLM releases correlate with shifts in GitHub commit activity and developer behaviour.</p>
-                    <div class="proj-tags"><span>Python</span><span>Data Analysis</span><span>GitHub API</span></div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- Education -->
-    <section class="section education" id="education">
-        <div class="container">
-            <p class="section-eyebrow"><span class="section-num">04</span> / education &amp; beyond</p>
-            <div class="edu-grid">
-                <div class="edu-card reveal">
-                    <h3>B.Tech, Electrical Engineering</h3>
-                    <p class="edu-school">NSIT, Delhi · 2019 - 2023</p>
-                </div>
-                <div class="edu-card achievements reveal">
-                    <p class="ach-eyebrow">Beyond work</p>
-                    <ul class="ach-list">
-                        <li><b>JEE Advanced, Top 1%</b><span>99.98 %ile in Mathematics</span></li>
-                        <li><b>NCC Air Force "A" Certificate</b><span>National Cadet Corps, Air Wing</span></li>
-                        <li><b>State‑level Swimming</b><span>Represented district in state tournaments</span></li>
-                        <li><b>Competitive Squash</b><span>Played club‑level squash tournaments</span></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Connect -->
-    <section class="section connect" id="connect">
-        <div class="container">
-            <p class="section-eyebrow"><span class="section-num">05</span> / connect</p>
-            <div class="connect-grid">
-                <div class="connect-text reveal">
-                    <h2 class="connect-head">Let's build something <span class="serif">worth a story.</span></h2>
-                    <p>Whether it's product, fintech, AI or just a good idea, I'm always up for a conversation. Reach out and say hi.</p>
-                    <a href="assets/res_tdyg.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Download résumé ↗</a>
-                </div>
-                <div class="connect-links reveal">
-                    <a href="mailto:godaradaksh2001@gmail.com" class="connect-card">
-                        <span class="connect-label">Email</span>
-                        <span class="connect-value">godaradaksh2001@gmail.com</span>
-                    </a>
-                    <a href="https://linkedin.com/in/daksh-godara-2001" target="_blank" rel="noopener" class="connect-card">
-                        <span class="connect-label">LinkedIn</span>
-                        <span class="connect-value">/in/daksh-godara-2001</span>
-                    </a>
-                    <a href="https://github.com/dakshgodara2001" target="_blank" rel="noopener" class="connect-card">
-                        <span class="connect-label">GitHub</span>
-                        <span class="connect-value">dakshgodara2001</span>
-                    </a>
-                    <a href="https://x.com/daksh1x3" target="_blank" rel="noopener" class="connect-card">
-                        <span class="connect-label">X (Twitter)</span>
-                        <span class="connect-value">@daksh1x3</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container footer-inner">
-            <p class="footer-text">And yes, do shoot that slingshot. 🪁</p>
-        </div>
-    </footer>
+    <button class="turn" id="turn" aria-pressed="false" aria-controls="card" aria-label="Turn over" title="Turn over">
+        <svg width="19" height="19" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 8a5.5 5.5 0 1 1-1.8-4.07"/><path d="M12 1.6v2.6H9.4"/></svg>
+    </button>
 
-    <!-- Celebration song: drop a clip named two-birds-one-stone.mp3 in /assets to enable -->
-    <audio id="celebration-song" preload="auto">
-        <source src="assets/two-birds-one-stone.mp3" type="audio/mpeg">
-    </audio>
+    <script>
+        const stage = document.getElementById('stage');
+        const card = document.getElementById('card');
+        const front = document.getElementById('front');
+        const back = document.getElementById('back');
+        const turn = document.getElementById('turn');
 
-    <!-- Scripts -->
-    <script src="js/main.js?v=4"></script>
+        // total rotation in degrees; every turn adds or removes half a revolution,
+        // so the card keeps spinning the way it was pushed instead of snapping back
+        let angle = 0;
+
+        function turnCard(dir) {                  // dir: +1 clockwise (right edge goes back), -1 anticlockwise
+            angle += dir * 180;
+            card.style.transform = `rotateY(${angle}deg)`;
+            const onBack = Math.abs(angle / 180) % 2 === 1;
+            front.inert = onBack; back.inert = !onBack;
+            front.setAttribute('aria-hidden', onBack); back.setAttribute('aria-hidden', !onBack);
+            turn.setAttribute('aria-pressed', onBack);
+            turn.setAttribute('aria-label', onBack ? 'Turn back' : 'Turn over');
+            turn.title = onBack ? 'Turn back' : 'Turn over';
+            harden(onBack ? 1 : 0);
+        }
+
+        // ---- his expression: the still face on the front, the hard stare on the back ----
+        const faces = [document.querySelector('.portrait .still'), ...document.querySelectorAll('.portrait .stare')];
+        const quiet = matchMedia('(prefers-reduced-motion: reduce)');
+        let mood = 0, goal = 0, frame = 0;
+        // the stare is fetched once the page has settled, and only shown once it is decoded
+        const ready = new Promise(res => addEventListener('load', () => {
+            const late = faces.slice(1);
+            const loaded = img => new Promise(ok => {
+                img.addEventListener('load', ok, { once: true });
+                img.addEventListener('error', ok, { once: true });
+                img.src = img.dataset.src;
+            }).then(() => Promise.race([img.decode().catch(() => {}), new Promise(ok => setTimeout(ok, 400))]));
+            Promise.all(late.map(loaded)).then(res);
+        }));
+        function paint(m) {                       // m: 0 still .. 1 stare, spread over the frames
+            const x = m * (faces.length - 1);
+            faces.forEach((img, i) => { img.style.opacity = Math.max(0, 1 - Math.abs(x - i)); });
+        }
+        function harden(to) {
+            goal = to;
+            ready.then(() => {
+                cancelAnimationFrame(frame);
+                const from = mood, start = performance.now();
+                // the brows gather slowly as the card turns, and ease off a little quicker;
+                // a turn caught halfway only travels the rest of the way, in proportion
+                const delay = to && !quiet.matches ? 150 : 0;
+                const dur = (quiet.matches ? 300 : (to ? 1500 : 1000)) * Math.max(.3, Math.abs(goal - from));
+                const step = () => {
+                    const t = Math.min(1, Math.max(0, (performance.now() - start - delay) / dur));
+                    const e = t * t * t * (t * (6 * t - 15) + 10);   // smootherstep: no jolt at either end
+                    mood = from + (goal - from) * e;
+                    paint(mood);
+                    if (t < 1) frame = requestAnimationFrame(step);
+                };
+                frame = requestAnimationFrame(step);
+            });
+        }
+
+        // ---- the portrait, placed from the card on every screen ----
+        // the picture: eyes 47.01% across and 33% down, his face about 0.58 of its height between the eyes
+        const portrait = document.getElementById('portrait');
+        const RATIO = 5421 / 1820, EYE_X = .4701, EYE_Y = .33, LIFT = .037;
+        function place() {
+            const W = document.body.clientWidth, H = document.body.clientHeight;
+            stage.style.marginTop = '';
+            let cardTop = stage.offsetTop;
+            const cx = stage.offsetLeft + stage.offsetWidth / 2;
+            // fill the screen, with the eyes a little above the card...
+            let h = Math.max(1.12 * H, cardTop / (EYE_Y + LIFT), (H - cardTop) / (1 - EYE_Y - LIFT));
+            const vignette = h > 1.25 * W;          // ...unless that would push an eye off a tall screen
+            let lift = LIFT;
+            if (vignette) {
+                h = Math.min(1.22 * W, H);          // both eyes in, the face centred on the screen,
+                lift = .075;                        // a small face needs a little more room above the card
+                const shift = (H - h) / 2 + (EYE_Y + lift) * h - cardTop;   // and the card moved to meet it
+                stage.style.marginTop = 2 * shift + 'px';
+                cardTop += shift;
+            }
+            const w = h * RATIO;
+            const top = cardTop - (EYE_Y + lift) * h;
+            // eyes a touch left of the card's centre, so his gaze falls on it; never leave a gap at the sides
+            let left = cx - .02 * W - EYE_X * w;
+            left = Math.min(0, Math.max(W - w, left));
+            portrait.classList.toggle('vignette', vignette);
+            Object.assign(portrait.style, { height: h + 'px', top: top + 'px', left: left + 'px' });
+        }
+        place();
+        let pending = 0;
+        const replace = () => { cancelAnimationFrame(pending); pending = requestAnimationFrame(place); };
+        addEventListener('resize', replace);
+        new ResizeObserver(replace).observe(document.body);   // also catches mobile toolbars showing and hiding
+
+        // click the right half to turn clockwise, the left half to turn anticlockwise; but a click
+        // that is really reading (dragging a selection, double-clicking a word, clearing a selection)
+        // leaves the card where it is
+        const selected = () => { const s = getSelection(); return s && !s.isCollapsed && stage.contains(s.anchorNode); };
+        let press = null, wait = 0;
+        stage.addEventListener('pointerdown', e => { press = { x: e.clientX, y: e.clientY, had: selected(), touch: e.pointerType === 'touch' }; });
+        stage.addEventListener('click', e => {
+            clearTimeout(wait);
+            if (e.target.closest('a') || e.detail > 1) return;
+            const moved = press && Math.hypot(e.clientX - press.x, e.clientY - press.y) > 4;
+            if (moved || (press && press.had) || selected()) return;
+            const r = stage.getBoundingClientRect();
+            const dir = e.clientX >= r.left + r.width / 2 ? 1 : -1;
+            // on words, wait a beat in case it is the first half of a double-click
+            const onText = e.target.closest('h1, h2, p, .label, .coords, .brand');
+            if (onText && !(press && press.touch)) wait = setTimeout(() => { if (!selected()) turnCard(dir); }, 220);
+            else turnCard(dir);
+        });
+        turn.addEventListener('click', () => turnCard(1));
+
+        if (location.hash === '#back') {           // open on the back without animating
+            card.style.transition = 'none';
+            turnCard(1);
+            card.offsetWidth;
+            card.style.transition = '';
+        }
+    </script>
 </body>
 </html>
