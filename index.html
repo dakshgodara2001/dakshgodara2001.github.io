@@ -142,15 +142,19 @@
             display: flex; flex-direction: column; justify-content: space-between;
             padding: 8% 8.5%;
         }
-        .top { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: flex-start; }
-        .social { display: flex; gap: max(9px, 2.6cqw); padding-top: .74cqw; }
-        .social a { color: var(--faint); display: block; transition: color .2s; }
+        .top { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: center; }
+        .social { display: flex; gap: max(14px, 2.6cqw); }
+        .social a { position: relative; color: var(--faint); display: block; transition: color .2s; }
         .social a:hover, .social a:focus-visible { color: var(--ink); outline: none; }
-        .social svg { display: block; width: max(11px, 2.6cqw); height: max(11px, 2.6cqw); }
+        .social svg { display: block; width: max(13px, 2.6cqw); height: max(13px, 2.6cqw); }
+        /* a thumb-sized hit area around each small mark (and each foot link), without moving anything:
+           the areas meet halfway across the gap between neighbours, so they never overlap */
+        .social a::after { content: ""; position: absolute; inset: -12px calc(max(14px, 2.6cqw) / -2); }
+        .foot a::after { content: ""; position: absolute; inset: -12px -1.4cqw; }
 
         .firm { text-align: right; }
         .firm .brand {
-            font-family: "Cormorant Garamond", serif; font-weight: 500;
+            display: block; font-family: "Cormorant Garamond", serif; font-weight: 500;
             font-size: max(13px, 3.85cqw); line-height: 1; letter-spacing: .01em;
         }
 
@@ -175,7 +179,7 @@
             font-family: "Cormorant Garamond", serif; font-weight: 500;
             font-size: max(11px, 2.75cqw); line-height: 1; letter-spacing: .03em; color: var(--muted);
         }
-        .foot a { white-space: nowrap; transition: color .2s; }
+        .foot a { position: relative; white-space: nowrap; transition: color .2s; }
         .foot a:hover, .foot a:focus-visible { color: var(--ink); outline: none; }
         .foot .rule { flex: none; width: 1px; height: max(9px, 2.3cqw); background: rgba(28, 36, 48, .18); }
 
